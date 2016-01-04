@@ -40,6 +40,7 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="S7L-Rs-n6L">
                                         <rect key="frame" x="0.0" y="0.0" width="230" height="49"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.50393264358108103" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="Djg-Ge-aAT"/>
                                             <constraint firstAttribute="width" constant="220" id="ieK-ll-e7P"/>
@@ -51,6 +52,7 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ojh-7F-YOR">
                                         <rect key="frame" x="0.0" y="64" width="230" height="44"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.50393264360000001" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="220" id="LRo-d6-Kgx"/>
                                             <constraint firstAttribute="height" constant="44" id="wU9-gr-Syk"/>
@@ -75,6 +77,9 @@
                                 <state key="normal" title="Login">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="loginButtonDidTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LBJ-JM-TjN"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gyt-P8-MPB">
                                 <rect key="frame" x="126" y="423" width="68" height="35"/>

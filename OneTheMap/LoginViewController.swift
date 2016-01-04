@@ -6,7 +6,9 @@
 //  Copyright © 2016 Ilia Tikhomirov. All rights reserved.
 //
 
+import Foundation
 import UIKit
+import Alamofire
 
 class LoginViewController: UIViewController {
     
@@ -47,6 +49,13 @@ class LoginViewController: UIViewController {
         self.unsubscribeToKeyboardNotifications()
     }
 
+    @IBAction func loginButtonDidTouch(sender: BorderedButton) {
+        
+     UdacityClient.postSession("RBKShadow@gmail.com", password: "WhiteFox2014")
+
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
