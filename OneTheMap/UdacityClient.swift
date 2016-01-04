@@ -11,8 +11,6 @@ import Alamofire
 
 class UdacityClient: NSObject {
     
-    var sessionId: String!
     
-   
     
 }

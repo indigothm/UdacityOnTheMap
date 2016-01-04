@@ -51,7 +51,10 @@ class LoginViewController: UIViewController {
 
     @IBAction func loginButtonDidTouch(sender: BorderedButton) {
         
-     UdacityClient.postSession("RBKShadow@gmail.com", password: "WhiteFox2014")
+        guard usernameTextField.text!.isEmpty && passwordTextField.text!.isEmpty else {
+            UdacityClient.postSession(usernameTextField.text!, password: passwordTextField.text!)
+            return
+        }
 
         
     }

@@ -41,10 +41,6 @@
                                         <rect key="frame" x="0.0" y="0.0" width="230" height="49"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.50393264358108103" colorSpace="calibratedRGB"/>
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="Djg-Ge-aAT"/>
-                                            <constraint firstAttribute="width" constant="220" id="ieK-ll-e7P"/>
-                                        </constraints>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
@@ -54,7 +50,6 @@
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.50393264360000001" colorSpace="calibratedRGB"/>
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="220" id="LRo-d6-Kgx"/>
                                             <constraint firstAttribute="height" constant="44" id="wU9-gr-Syk"/>
                                         </constraints>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -81,8 +76,8 @@
                                     <action selector="loginButtonDidTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LBJ-JM-TjN"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gyt-P8-MPB">
-                                <rect key="frame" x="126" y="423" width="68" height="35"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gyt-P8-MPB">
+                                <rect key="frame" x="128" y="423" width="64" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Sign Up">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>

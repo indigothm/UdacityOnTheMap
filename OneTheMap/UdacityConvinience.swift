@@ -37,12 +37,12 @@ extension UdacityClient {
                         let range = NSMakeRange(0,5)
                         data.deleteCharactersInRange(range)
                         
-                        let json = JSON(data)
-                        print("JSON: \(json)")
-                        
-                        //COMPLETE OPERATIONS WITH JSON
-
-                      
+                        if let dataFromString = data.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
+                            let json = JSON(data: dataFromString)
+                            print("JSON: \(json)")
+                            print(json["session"]["id"])
+                            
+                        }
                 
                 }
                 
