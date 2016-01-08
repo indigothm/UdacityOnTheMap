@@ -121,25 +121,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Fp-mv-M0l">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Fp-mv-M0l" customClass="MainToolbar" customModule="OneTheMap" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="GZ3-Ha-HMC"/>
                                 </constraints>
-                                <items>
-                                    <barButtonItem title="Item" id="HyU-CG-bTH"/>
-                                </items>
+                                <items/>
                             </toolbar>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="qxd-Eb-O6k">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="wrv-rh-rxh" firstAttribute="top" secondItem="qxd-Eb-O6k" secondAttribute="bottom" id="C33-1r-35S"/>
                             <constraint firstAttribute="trailing" secondItem="3Fp-mv-M0l" secondAttribute="trailing" id="LJZ-JI-OY6"/>
+                            <constraint firstItem="qxd-Eb-O6k" firstAttribute="top" secondItem="3Fp-mv-M0l" secondAttribute="bottom" id="TEP-2b-iFa"/>
+                            <constraint firstItem="qxd-Eb-O6k" firstAttribute="leading" secondItem="cjD-Rp-JgN" secondAttribute="leading" id="YI8-Js-Yfy"/>
                             <constraint firstItem="3Fp-mv-M0l" firstAttribute="leading" secondItem="cjD-Rp-JgN" secondAttribute="leading" id="mX7-9S-Jxn"/>
                             <constraint firstItem="3Fp-mv-M0l" firstAttribute="top" secondItem="wAr-9w-oNv" secondAttribute="bottom" id="ndy-VT-tVC"/>
+                            <constraint firstAttribute="trailing" secondItem="qxd-Eb-O6k" secondAttribute="trailing" id="oUn-1i-0of"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="vOl-jj-i8c"/>
                     <connections>
+                        <outlet property="mapView" destination="qxd-Eb-O6k" id="NPf-WQ-HXu"/>
                         <outlet property="toolbar" destination="3Fp-mv-M0l" id="nUg-bG-ey1"/>
                     </connections>
                 </viewController>
@@ -159,14 +165,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5HH-5O-10q">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5HH-5O-10q" customClass="MainToolbar" customModule="OneTheMap" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="0Lc-6h-oQx"/>
                                 </constraints>
-                                <items>
-                                    <barButtonItem title="Item" id="Uhx-pc-cku"/>
-                                </items>
+                                <items/>
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

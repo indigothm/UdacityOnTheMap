@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import MapKit
 
 class MapViewController: UIViewController, UIToolbarDelegate {
 
     @IBOutlet weak var toolbar: UIToolbar!
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var test: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +30,9 @@ class MapViewController: UIViewController, UIToolbarDelegate {
     override func viewWillAppear(animated: Bool) {
         
         super.viewWillAppear(true)
+
+       
+
         
     }
 

@@ -17,6 +17,7 @@
 		3F393A6F1C3A5D1D00DCDC2B /* UdacityConvinience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F393A6E1C3A5D1D00DCDC2B /* UdacityConvinience.swift */; };
 		3FB4DC3D1C3F535600A0EFDC /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB4DC3C1C3F535600A0EFDC /* MapViewController.swift */; };
 		3FB4DC3F1C3F571F00A0EFDC /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB4DC3E1C3F571E00A0EFDC /* TableViewController.swift */; };
+		3FB4DC411C4038C900A0EFDC /* MainToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB4DC401C4038C900A0EFDC /* MainToolbar.swift */; };
 		7FE60FEE6D1D48B1D4BC488B /* Pods_OneTheMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF7423B7A41263167726933 /* Pods_OneTheMap.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +36,7 @@
 		3F393A6E1C3A5D1D00DCDC2B /* UdacityConvinience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityConvinience.swift; sourceTree = "<group>"; };
 		3FB4DC3C1C3F535600A0EFDC /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		3FB4DC3E1C3F571E00A0EFDC /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		3FB4DC401C4038C900A0EFDC /* MainToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainToolbar.swift; sourceTree = "<group>"; };
 		729E0BBBC9F30056012A73A0 /* Pods-OneTheMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneTheMap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OneTheMap/Pods-OneTheMap.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				3F393A681C390F3900DCDC2B /* BorderedButton.swift */,
+				3FB4DC401C4038C900A0EFDC /* MainToolbar.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 				3FB4DC3F1C3F571F00A0EFDC /* TableViewController.swift in Sources */,
 				3FB4DC3D1C3F535600A0EFDC /* MapViewController.swift in Sources */,
 				3F393A6F1C3A5D1D00DCDC2B /* UdacityConvinience.swift in Sources */,
+				3FB4DC411C4038C900A0EFDC /* MainToolbar.swift in Sources */,
 				3F393A591C39096600DCDC2B /* LoginViewController.swift in Sources */,
 				3F393A571C39096600DCDC2B /* AppDelegate.swift in Sources */,
 				3F393A691C390F3900DCDC2B /* BorderedButton.swift in Sources */,

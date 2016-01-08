@@ -10,10 +10,13 @@ import Foundation
 import UIKit
 import Alamofire
 import SwiftyJSON
+import SwiftSpinner
 
 extension UdacityClient {
     
     class func postSession(username: String, password: String, completionHandler: (Bool) -> Void) {
+        
+    SwiftSpinner.show("Authenticating...")
             
     let parameters: [ String : [String: AnyObject]] = [
             "udacity": [
@@ -25,6 +28,7 @@ extension UdacityClient {
     print("works")
         
     Alamofire.request(.POST, "https://www.udacity.com/api/session", parameters: parameters, encoding: .JSON).responseString(completionHandler: { (response) in
+        
         
             print(response.result)
 
@@ -43,15 +47,25 @@ extension UdacityClient {
                             print("JSON: \(json)")
                             print(json["session"]["id"])
                             
-                            if let session = json["session"]["id"].string {
+                            if let _ = json["session"]["id"].string {
+                            SwiftSpinner.hide()
                             completionHandler(true)
+                            } else {
+                                SwiftSpinner.show("Wrong credentials", animated: false).addTapHandler({
+                                    SwiftSpinner.hide()
+                                })
+
                             }
+        
                         }
                 
                 }
                 
                 case .Failure(let error):
                     print(error)
+                    SwiftSpinner.show("Connection Error", animated: false).addTapHandler({
+                        SwiftSpinner.hide()
+                    })
                 
                 
         }
