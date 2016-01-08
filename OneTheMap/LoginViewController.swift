@@ -51,6 +51,8 @@ class LoginViewController: UIViewController {
 
     @IBAction func loginButtonDidTouch(sender: BorderedButton) {
         
+        //TODO: Add loading view and status textfield
+        
         guard usernameTextField.text!.isEmpty && passwordTextField.text!.isEmpty else {
             UdacityClient.postSession(usernameTextField.text!, password: passwordTextField.text!, completionHandler: {status in
             
