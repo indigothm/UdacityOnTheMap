@@ -13,8 +13,8 @@ import SwiftyJSON
 
 extension UdacityClient {
     
-   class func postSession(username: String, password: String) {
-        
+    class func postSession(username: String, password: String, completionHandler: (Bool) -> Void) {
+            
     let parameters: [ String : [String: AnyObject]] = [
             "udacity": [
             "username": username,
@@ -24,7 +24,7 @@ extension UdacityClient {
     
     print("works")
         
-    Alamofire.request(.POST, "https://www.udacity.com/api/session", parameters: parameters, encoding: .JSON).responseString(completionHandler: { response in
+    Alamofire.request(.POST, "https://www.udacity.com/api/session", parameters: parameters, encoding: .JSON).responseString(completionHandler: { (response) in
         
             print(response.result)
 
@@ -39,22 +39,25 @@ extension UdacityClient {
                         
                         if let dataFromString = data.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
                             let json = JSON(data: dataFromString)
+                            
                             print("JSON: \(json)")
                             print(json["session"]["id"])
                             
+                            if let session = json["session"]["id"].string {
+                            completionHandler(true)
+                            }
                         }
                 
                 }
                 
                 case .Failure(let error):
                     print(error)
+                
+                
         }
         
-        
-        
-        
-            
         })
+    
 
     
     
@@ -62,6 +65,7 @@ extension UdacityClient {
     
 
 }
+
 
 extension String {
     mutating func deleteCharactersInRange(range: NSRange) {

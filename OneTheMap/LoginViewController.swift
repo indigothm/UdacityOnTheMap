@@ -52,12 +52,28 @@ class LoginViewController: UIViewController {
     @IBAction func loginButtonDidTouch(sender: BorderedButton) {
         
         guard usernameTextField.text!.isEmpty && passwordTextField.text!.isEmpty else {
-            UdacityClient.postSession(usernameTextField.text!, password: passwordTextField.text!)
+            UdacityClient.postSession(usernameTextField.text!, password: passwordTextField.text!, completionHandler: {status in
+            
+                if status {
+                    
+                    print("TRANSITION TEST")
+                    
+                    dispatch_async(dispatch_get_main_queue(), {
+                        
+                      let controller = self.storyboard!.instantiateViewControllerWithIdentifier("rootView") as! UITabBarController
+                      self.presentViewController(controller, animated: true, completion: nil)
+                      
+                        
+                    })
+                }
+                
+            })
             return
         }
 
         
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
