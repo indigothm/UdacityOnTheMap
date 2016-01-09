@@ -1,36 +1,19 @@
 //
-//  MapViewController.swift
+//  LocationSearchViewController.swift
 //  OneTheMap
 //
-//  Created by Ilia Tikhomirov on 07/01/16.
+//  Created by Ilia Tikhomirov on 09/01/16.
 //  Copyright © 2016 Ilia Tikhomirov. All rights reserved.
 //
 
 import UIKit
-import MapKit
 
-class MapViewController: UIViewController, UINavigationBarDelegate  {
-
-    @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var navBar: UINavigationBar!
-    
+class LocationSearchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navBar.delegate = self
-        
-    }
-    
-    func positionForBar(bar: UIBarPositioning) -> UIBarPosition {
-        return UIBarPosition.TopAttached
-    }
-    
-    
 
-    override func viewWillAppear(animated: Bool) {
-        
-        super.viewWillAppear(true)
-
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,6 +21,11 @@ class MapViewController: UIViewController, UINavigationBarDelegate  {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func findOnTheMapDidTouch(sender: AnyObject) {
+        
+        
+        
+    }
 
     /*
     // MARK: - Navigation

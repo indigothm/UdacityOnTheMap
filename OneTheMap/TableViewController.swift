@@ -8,9 +8,10 @@
 
 import UIKit
 
-class TableViewController: UIViewController, UIToolbarDelegate {
+class TableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UINavigationBarDelegate {
     
-    @IBOutlet weak var toolbar: UIToolbar!
+    @IBOutlet weak var mainTableView: UITableView!
+    @IBOutlet weak var navBar: UINavigationBar!
     
     func positionForBar(bar: UIBarPositioning) -> UIBarPosition {
         return UIBarPosition.TopAttached
@@ -20,13 +21,39 @@ class TableViewController: UIViewController, UIToolbarDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        toolbar.delegate = self
+        navBar.delegate = self
+        mainTableView.delegate = self
+        mainTableView.dataSource = self
         
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 8
+    }
+
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("main", forIndexPath: indexPath) as UITableViewCell
+        
+        //let row = indexPath.row
+        //cell.textLabel?.text = swiftBlogs[row]
+        
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        
+        
     }
     
 
