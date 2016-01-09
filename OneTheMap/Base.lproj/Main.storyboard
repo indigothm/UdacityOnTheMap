@@ -133,7 +133,11 @@
                                         <barButtonItem key="leftBarButtonItem" title="Logout" id="kMF-Fg-dt3"/>
                                         <rightBarButtonItems>
                                             <barButtonItem systemItem="refresh" id="JMB-8x-DED"/>
-                                            <barButtonItem systemItem="add" id="eRH-ts-bsE"/>
+                                            <barButtonItem systemItem="add" id="eRH-ts-bsE">
+                                                <connections>
+                                                    <action selector="addBtnDidTouch:" destination="Vo9-qM-6ud" id="3B3-Et-ey2"/>
+                                                </connections>
+                                            </barButtonItem>
                                         </rightBarButtonItems>
                                     </navigationItem>
                                 </items>
@@ -164,7 +168,6 @@
                     <connections>
                         <outlet property="mapView" destination="qxd-Eb-O6k" id="NPf-WQ-HXu"/>
                         <outlet property="navBar" destination="JYf-dE-HLF" id="6hF-gw-8Vy"/>
-                        <segue destination="v1T-zW-lLa" kind="presentation" identifier="addL" id="FXU-kb-bq6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q9y-Wo-e7j" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -190,7 +193,11 @@
                                         <barButtonItem key="leftBarButtonItem" title="Logout" id="F3a-pt-5PH"/>
                                         <rightBarButtonItems>
                                             <barButtonItem systemItem="refresh" id="b9Z-Wg-7W4"/>
-                                            <barButtonItem systemItem="add" id="abs-Ay-4p8"/>
+                                            <barButtonItem systemItem="add" id="abs-Ay-4p8">
+                                                <connections>
+                                                    <action selector="addBtnDidTouch:" destination="axU-2F-Z1J" id="yyS-ce-baR"/>
+                                                </connections>
+                                            </barButtonItem>
                                         </rightBarButtonItems>
                                     </navigationItem>
                                 </items>
@@ -285,6 +292,75 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0SL-rw-a6l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="914" y="400"/>
+        </scene>
+        <!--Link View Controller-->
+        <scene sceneID="bp9-yW-5fY">
+            <objects>
+                <viewController id="5b6-p0-wCH" customClass="LinkViewController" customModule="OneTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xpi-ME-MMQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="fWh-7w-zpG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="se7-9A-2x3">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Pqp-vR-3cz">
+                                <rect key="frame" x="0.0" y="188" width="600" height="412"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dH2-pA-bOi">
+                                <rect key="frame" x="538" y="28" width="48" height="30"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter a link to share" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sPx-ON-paX">
+                                <rect key="frame" x="208" y="79" width="184" height="30"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eEi-bw-wMl">
+                                <rect key="frame" x="0.0" y="531" width="600" height="69"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ST1-6h-5cM">
+                                        <rect key="frame" x="275" y="19" width="52" height="32"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="Submit">
+                                            <color key="titleColor" red="0.031372549020000001" green="0.16078431369999999" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="69" id="FeP-c1-5wo"/>
+                                    <constraint firstItem="ST1-6h-5cM" firstAttribute="centerX" secondItem="eEi-bw-wMl" secondAttribute="centerX" id="gKg-y6-Qtm"/>
+                                    <constraint firstItem="ST1-6h-5cM" firstAttribute="centerY" secondItem="eEi-bw-wMl" secondAttribute="centerY" id="hX2-td-0HE"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.031372549019607843" green="0.16078431372549021" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="fWh-7w-zpG" firstAttribute="top" secondItem="eEi-bw-wMl" secondAttribute="bottom" id="28S-Hc-Hmd"/>
+                            <constraint firstItem="dH2-pA-bOi" firstAttribute="top" secondItem="xpi-ME-MMQ" secondAttribute="bottom" constant="8" id="5Nt-jf-poM"/>
+                            <constraint firstAttribute="trailing" secondItem="eEi-bw-wMl" secondAttribute="trailing" id="CIc-HB-oRJ"/>
+                            <constraint firstItem="eEi-bw-wMl" firstAttribute="leading" secondItem="se7-9A-2x3" secondAttribute="leading" id="LIp-Eo-v1o"/>
+                            <constraint firstItem="Pqp-vR-3cz" firstAttribute="top" secondItem="xpi-ME-MMQ" secondAttribute="bottom" constant="168" id="XrZ-Ar-ux1"/>
+                            <constraint firstItem="fWh-7w-zpG" firstAttribute="top" secondItem="Pqp-vR-3cz" secondAttribute="bottom" id="bfe-MA-Mpv"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="dH2-pA-bOi" secondAttribute="trailing" constant="-6" id="dVc-2h-BLu"/>
+                            <constraint firstItem="sPx-ON-paX" firstAttribute="centerX" secondItem="se7-9A-2x3" secondAttribute="centerX" id="eDO-Ue-lgG"/>
+                            <constraint firstAttribute="trailing" secondItem="Pqp-vR-3cz" secondAttribute="trailing" id="t4U-Ki-DPh"/>
+                            <constraint firstItem="sPx-ON-paX" firstAttribute="top" secondItem="xpi-ME-MMQ" secondAttribute="bottom" constant="59" id="vxg-Iz-gQQ"/>
+                            <constraint firstItem="Pqp-vR-3cz" firstAttribute="leading" secondItem="se7-9A-2x3" secondAttribute="leading" id="y6P-gI-m1X"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="map" destination="Pqp-vR-3cz" id="Lj2-wE-8R0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aJo-lQ-RVh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="408" y="1218"/>
         </scene>
         <!--locationViewController-->
         <scene sceneID="1N1-sv-loU">

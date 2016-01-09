@@ -14,6 +14,13 @@ class MapViewController: UIViewController, UINavigationBarDelegate  {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var navBar: UINavigationBar!
     
+    @IBAction func addBtnDidTouch(sender: AnyObject) {
+        
+        let controller  = self.storyboard!.instantiateViewControllerWithIdentifier("locationViewController") as! LocationSearchViewController
+        
+        self.presentViewController(controller, animated: true, completion: nil)
+        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

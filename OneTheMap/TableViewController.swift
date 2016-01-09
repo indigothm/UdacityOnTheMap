@@ -16,6 +16,13 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func positionForBar(bar: UIBarPositioning) -> UIBarPosition {
         return UIBarPosition.TopAttached
     }
+    @IBAction func addBtnDidTouch(sender: AnyObject) {
+        
+        let controller  = self.storyboard!.instantiateViewControllerWithIdentifier("locationViewController") as! LocationSearchViewController
+        
+        self.presentViewController(controller, animated: true, completion: nil)
+        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
