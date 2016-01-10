@@ -26,6 +26,8 @@ class MapViewController: UIViewController, UINavigationBarDelegate  {
         super.viewDidLoad()
         navBar.delegate = self
         
+        UdacityClient.getLocations()
+        
     }
     
     func positionForBar(bar: UIBarPositioning) -> UIBarPosition {

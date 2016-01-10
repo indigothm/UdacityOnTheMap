@@ -14,6 +14,72 @@ import SwiftSpinner
 
 extension UdacityClient {
     
+    class func getLocations() -> Void {
+        
+        Alamofire.request(.GET, "https://api.parse.com/1/classes/StudentLocation", headers: ["X-Parse-Application-Id": "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", "X-Parse-REST-API-Key": "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"]).responseJSON(completionHandler: { (response) in
+        
+            print("TEST2")
+            print(response)
+            
+            switch response.result {
+            case .Success:
+                
+                if let value = response.result.value {
+                    
+                    
+                        SwiftSpinner.hide()
+                        let json = JSON(value)
+                        print("JSON: \(json)")
+                    
+                        print(json["results"][1]["latitude"])
+                    
+                 //       for object in json["results"] {
+                            
+                           /*
+                            let pinPoint: LocationPost = LocationPost(
+                                
+                                firstname: object["firstname"].string,
+                                lastname: object["lastname"].string,
+                                mediaUrl: object["mediaUrl"].string,
+                                latitude: object["latitude"].string,
+                                longitude: object["longitude"].string
+                            
+                            )
+*/
+                            
+                        //    print(pinPoint)
+                    
+               //         }
+                    
+                    
+                    for (key, subJson) in json["results"] {
+                        
+                      //  print(key)
+                      //  print(subJson)
+                        
+                        if let name = subJson["firstName"].string {
+                            print(name)
+                        }
+                    }
+               
+                    
+                    
+                }
+                
+            case .Failure(let error):
+                print(error)
+                SwiftSpinner.show("Connection Error", animated: false).addTapHandler({
+                    SwiftSpinner.hide()
+                })
+                
+                
+            }
+
+            
+        })
+        
+    }
+    
     class func postSession(username: String, password: String, completionHandler: (Bool) -> Void) {
         
     SwiftSpinner.show("Authenticating...")
