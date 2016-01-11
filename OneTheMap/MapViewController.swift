@@ -26,7 +26,14 @@ class MapViewController: UIViewController, UINavigationBarDelegate  {
         super.viewDidLoad()
         navBar.delegate = self
         
-        UdacityClient.getLocations()
+        UdacityClient.getLocations({ data in
+            
+            print(data)
+            
+            self.mapView.addAnnotation(data[4])
+          
+        
+            })
         
     }
     

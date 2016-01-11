@@ -7,16 +7,21 @@
 //
 
 import Foundation
+import MapKit
 
-class LocationPost: NSObject {
+class LocationPost: NSObject, MKAnnotation {
     
     let firstname: String
     let lastname: String
     let mediaUrl: String
-    let latitude: String
-    let longitude: String
+    let latitude: Double
+    let longitude: Double
     
-    init(firstname: String, lastname: String, mediaUrl: String, latitude: String, longitude: String) {
+    var coordinate: CLLocationCoordinate2D {
+        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    }
+    
+    init(firstname: String, lastname: String, mediaUrl: String, latitude: Double, longitude: Double) {
         
         self.firstname = firstname
         self.lastname = lastname
@@ -25,5 +30,6 @@ class LocationPost: NSObject {
         self.longitude = longitude
         
     }
+    
     
 }

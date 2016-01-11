@@ -12,5 +12,4 @@ import Alamofire
 class UdacityClient: NSObject {
     
     
-    
 }
