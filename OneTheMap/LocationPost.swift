@@ -17,6 +17,14 @@ class LocationPost: NSObject, MKAnnotation {
     let latitude: Double
     let longitude: Double
     
+    var title: String? {
+        return firstname + " " + lastname
+    }
+    
+    var subtitle: String? {
+        return mediaUrl
+    }
+    
     var coordinate: CLLocationCoordinate2D {
         return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }

@@ -30,8 +30,11 @@ class MapViewController: UIViewController, UINavigationBarDelegate  {
             
             print(data)
             
-            self.mapView.addAnnotation(data[4])
-          
+            for point in data {
+            
+            self.mapView.addAnnotation(point)
+            
+            }
         
             })
         
