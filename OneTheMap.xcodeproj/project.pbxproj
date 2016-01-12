@@ -20,6 +20,7 @@
 		3FB4DC451C41705400A0EFDC /* LocationSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB4DC441C41705400A0EFDC /* LocationSearchViewController.swift */; };
 		3FB4DC471C41B5A900A0EFDC /* LinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB4DC461C41B5A900A0EFDC /* LinkViewController.swift */; };
 		3FB4DC491C42DD8C00A0EFDC /* LocationPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB4DC481C42DD8C00A0EFDC /* LocationPost.swift */; };
+		3FB4DC4D1C44A3D200A0EFDC /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB4DC4C1C44A3D200A0EFDC /* TableViewCell.swift */; };
 		7FE60FEE6D1D48B1D4BC488B /* Pods_OneTheMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF7423B7A41263167726933 /* Pods_OneTheMap.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 		3FB4DC441C41705400A0EFDC /* LocationSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationSearchViewController.swift; path = ../LocationSearchViewController.swift; sourceTree = "<group>"; };
 		3FB4DC461C41B5A900A0EFDC /* LinkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkViewController.swift; sourceTree = "<group>"; };
 		3FB4DC481C42DD8C00A0EFDC /* LocationPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationPost.swift; sourceTree = "<group>"; };
+		3FB4DC4C1C44A3D200A0EFDC /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		729E0BBBC9F30056012A73A0 /* Pods-OneTheMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneTheMap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OneTheMap/Pods-OneTheMap.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,6 +83,7 @@
 				3F393A6A1C3A58C400DCDC2B /* View */,
 				3F393A561C39096600DCDC2B /* AppDelegate.swift */,
 				3FB4DC461C41B5A900A0EFDC /* LinkViewController.swift */,
+				3FB4DC4C1C44A3D200A0EFDC /* TableViewCell.swift */,
 				3F393A581C39096600DCDC2B /* LoginViewController.swift */,
 				3FB4DC441C41705400A0EFDC /* LocationSearchViewController.swift */,
 				3FB4DC3C1C3F535600A0EFDC /* MapViewController.swift */,
@@ -256,6 +259,7 @@
 				3FB4DC3D1C3F535600A0EFDC /* MapViewController.swift in Sources */,
 				3F393A6F1C3A5D1D00DCDC2B /* UdacityConvinience.swift in Sources */,
 				3F393A591C39096600DCDC2B /* LoginViewController.swift in Sources */,
+				3FB4DC4D1C44A3D200A0EFDC /* TableViewCell.swift in Sources */,
 				3F393A571C39096600DCDC2B /* AppDelegate.swift in Sources */,
 				3FB4DC451C41705400A0EFDC /* LocationSearchViewController.swift in Sources */,
 				3F393A691C390F3900DCDC2B /* BorderedButton.swift in Sources */,

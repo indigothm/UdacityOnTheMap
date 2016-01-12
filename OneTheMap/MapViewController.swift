@@ -24,6 +24,7 @@ class MapViewController: UIViewController, UINavigationBarDelegate  {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         navBar.delegate = self
         
         UdacityClient.getLocations({ data in

@@ -12,6 +12,9 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBOutlet weak var mainTableView: UITableView!
     @IBOutlet weak var navBar: UINavigationBar!
+    @IBOutlet weak var tableViewMain: UITableView!
+    
+    var dataArray: [LocationPost] = []
     
     func positionForBar(bar: UIBarPositioning) -> UIBarPosition {
         return UIBarPosition.TopAttached
@@ -32,6 +35,20 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         mainTableView.delegate = self
         mainTableView.dataSource = self
         
+        UdacityClient.getLocations({ data in
+            
+            print(data)
+            
+            
+                
+                self.dataArray = data
+                self.tableViewMain.reloadData()
+                
+            
+            
+        })
+
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,22 +61,27 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 8
+        return dataArray.count
     }
 
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("main", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("main", forIndexPath: indexPath) as! TableViewCell
         
-        //let row = indexPath.row
+        let row = indexPath.row
         //cell.textLabel?.text = swiftBlogs[row]
+        
+        cell.nameLabel.text = dataArray[row].firstname
+        cell.infoLabel.text = dataArray[row].mediaUrl
+        
+        
         
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        
+        //will work on it later
         
     }
     
