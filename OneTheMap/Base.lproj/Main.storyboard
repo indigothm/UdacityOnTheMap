@@ -310,7 +310,7 @@
         <!--Link View Controller-->
         <scene sceneID="bp9-yW-5fY">
             <objects>
-                <viewController id="5b6-p0-wCH" customClass="LinkViewController" customModule="OneTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="linkView" id="5b6-p0-wCH" customClass="LinkViewController" customModule="OneTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xpi-ME-MMQ"/>
                         <viewControllerLayoutGuide type="bottom" id="fWh-7w-zpG"/>

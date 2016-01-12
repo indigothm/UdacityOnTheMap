@@ -13,10 +13,13 @@ class LinkViewController: UIViewController {
 
     @IBOutlet weak var map: MKMapView!
     
+    var coordinates: CLLocationCoordinate2D!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        print(coordinates)
     }
 
     override func didReceiveMemoryWarning() {
