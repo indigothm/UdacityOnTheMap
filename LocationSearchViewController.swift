@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import MapKit
 
 class LocationSearchViewController: UIViewController, UITextFieldDelegate {
     
     var tapRecognizer: UITapGestureRecognizer? = nil
     var keyboardAdjusted = false
     var lastKeyboardOffset : CGFloat = 0.0
+    let geocoder = CLGeocoder()
     
     @IBOutlet weak var searchTextField: UITextField!
     
@@ -53,7 +55,23 @@ class LocationSearchViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func findOnTheMapDidTouch(sender: AnyObject) {
         
+        let address = searchTextField.text
         
+        guard address != nil else {
+            print("Empty String")
+            return
+        }
+        
+        geocoder.geocodeAddressString(address!, completionHandler: {(placemarks, error) -> Void in
+            if((error) != nil){
+                print("Error", error)
+            }
+            if let placemark = placemarks?.first {
+                let coordinates:CLLocationCoordinate2D = placemark.location!.coordinate
+                print (placemark)
+                print (coordinates)
+            }
+        })
         
         
     }
