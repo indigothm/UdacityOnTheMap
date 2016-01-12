@@ -11,7 +11,7 @@ import UIKit
 import Alamofire
 import SwiftSpinner
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Properties
     
@@ -34,6 +34,9 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         /* Configure the UI */
         self.configureUI()
+        usernameTextField.delegate = self
+        passwordTextField.delegate = self
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -53,6 +56,7 @@ class LoginViewController: UIViewController {
     @IBAction func loginButtonDidTouch(sender: BorderedButton) {
         
         //TODO: Add loading view and status textfield
+        self.view.endEditing(true)
         
         guard usernameTextField.text!.isEmpty && passwordTextField.text!.isEmpty else {
             UdacityClient.postSession(usernameTextField.text!, password: passwordTextField.text!, completionHandler: {status in
@@ -172,5 +176,11 @@ extension LoginViewController {
         let userInfo = notification.userInfo
         let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
         return keyboardSize.CGRectValue().height
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool // called when 'return' key pressed. return NO to ignore.
+    {
+        textField.resignFirstResponder()
+        return true;
     }
 }
