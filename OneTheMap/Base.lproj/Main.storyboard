@@ -111,7 +111,7 @@
             </objects>
             <point key="canvasLocation" x="325" y="400"/>
         </scene>
-        <!--Item-->
+        <!--Map-->
         <scene sceneID="PbN-Tw-Ecd">
             <objects>
                 <viewController id="Vo9-qM-6ud" customClass="MapViewController" customModule="OneTheMap" customModuleProvider="target" sceneMemberID="viewController">
@@ -133,7 +133,7 @@
                                         <barButtonItem key="leftBarButtonItem" title="Logout" id="kMF-Fg-dt3"/>
                                         <rightBarButtonItems>
                                             <barButtonItem systemItem="refresh" id="JMB-8x-DED"/>
-                                            <barButtonItem systemItem="add" id="eRH-ts-bsE">
+                                            <barButtonItem image="Pin" id="eRH-ts-bsE">
                                                 <connections>
                                                     <action selector="addBtnDidTouch:" destination="Vo9-qM-6ud" id="3B3-Et-ey2"/>
                                                 </connections>
@@ -164,7 +164,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="vOl-jj-i8c"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="Map" id="vOl-jj-i8c"/>
                     <connections>
                         <outlet property="mapView" destination="qxd-Eb-O6k" id="NPf-WQ-HXu"/>
                         <outlet property="navBar" destination="JYf-dE-HLF" id="6hF-gw-8Vy"/>
@@ -174,7 +174,7 @@
             </objects>
             <point key="canvasLocation" x="1740" y="400"/>
         </scene>
-        <!--Item-->
+        <!--List-->
         <scene sceneID="Lxh-qX-t1b">
             <objects>
                 <viewController id="axU-2F-Z1J" customClass="TableViewController" customModule="OneTheMap" customModuleProvider="target" sceneMemberID="viewController">
@@ -193,7 +193,7 @@
                                         <barButtonItem key="leftBarButtonItem" title="Logout" id="F3a-pt-5PH"/>
                                         <rightBarButtonItems>
                                             <barButtonItem systemItem="refresh" id="b9Z-Wg-7W4"/>
-                                            <barButtonItem systemItem="add" id="abs-Ay-4p8">
+                                            <barButtonItem image="Pin" id="abs-Ay-4p8">
                                                 <connections>
                                                     <action selector="addBtnDidTouch:" destination="axU-2F-Z1J" id="yyS-ce-baR"/>
                                                 </connections>
@@ -278,7 +278,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="yQ1-C7-OLz"/>
+                    <tabBarItem key="tabBarItem" title="List" image="List" id="yQ1-C7-OLz"/>
                     <connections>
                         <outlet property="mainTableView" destination="7rc-PP-ENU" id="Hfb-uq-CLy"/>
                         <outlet property="navBar" destination="5k1-8T-D0T" id="np2-xV-h1U"/>
@@ -466,6 +466,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="List" width="28" height="23"/>
+        <image name="Map" width="30" height="23"/>
+        <image name="Pin" width="15" height="20"/>
         <image name="Target" width="626" height="626"/>
         <image name="UdacityLogo" width="500" height="545"/>
     </resources>
