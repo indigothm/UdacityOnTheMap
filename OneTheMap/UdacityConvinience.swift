@@ -97,18 +97,33 @@ extension UdacityClient {
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil { // Handle error…
                 
+                print("ERROR PATH")
                 SwiftSpinner.show("Error", animated: false).addTapHandler({
                     SwiftSpinner.hide()
                 })
                 
                 return
             }
+            
             let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
             print(NSString(data: newData, encoding: NSUTF8StringEncoding))
             
             let responseJSON = try! NSJSONSerialization.JSONObjectWithData(newData, options: NSJSONReadingOptions.MutableContainers) as? [String:AnyObject]
             
             print(responseJSON)
+
+            if let status = responseJSON?["status"] {
+                
+                print("Status")
+                
+            
+                SwiftSpinner.show("Wrong credentials", animated: false).addTapHandler({
+                    SwiftSpinner.hide()
+                })
+            
+                
+            }
+            
             if let sesid = responseJSON?["session"]?["id"] {
                 SwiftSpinner.hide()
                 
@@ -131,7 +146,6 @@ extension UdacityClient {
         }
         task.resume()
         
-        //FIX ERROR HANDING
     
     
     }
