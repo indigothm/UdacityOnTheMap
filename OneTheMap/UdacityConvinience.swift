@@ -108,6 +108,13 @@ extension UdacityClient {
                             if let _ = json["session"]["id"].string {
                             SwiftSpinner.hide()
                             completionHandler(true)
+                                
+                                if let idNumber = json["account"]["key"].string {
+                                    
+                                    getPublicData(idNumber)
+                                    
+                                }
+                                
                             } else {
                                 SwiftSpinner.show("Wrong credentials", animated: false).addTapHandler({
                                     SwiftSpinner.hide()
@@ -132,6 +139,27 @@ extension UdacityClient {
     
 
     
+    
+    }
+    
+    class func getPublicData(key: String) {
+        
+        print("GETTING PUBLIC DATA")
+    
+        Alamofire.request(.GET, "https://www.udacity.com/api/users/" + key).response(completionHandler: { (response) in
+            
+            print("DISPLAYING")
+            
+            let data = response.2
+            
+            let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5))
+            
+            print(NSString(data: newData, encoding: NSUTF8StringEncoding))
+            
+            
+        
+        })
+        
     
     }
     

@@ -369,6 +369,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="linkTextField" destination="sPx-ON-paX" id="HZ1-lr-Xj0"/>
                         <outlet property="map" destination="Pqp-vR-3cz" id="Lj2-wE-8R0"/>
                     </connections>
                 </viewController>

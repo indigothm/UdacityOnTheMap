@@ -36,6 +36,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.configureUI()
         usernameTextField.delegate = self
         passwordTextField.delegate = self
+        //UdacityClient.getPublicData()
         
     }
     
@@ -77,6 +78,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             })
             return
         }
+        
+        
 
         
     }

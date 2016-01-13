@@ -68,11 +68,13 @@ class LocationSearchViewController: UIViewController, UITextFieldDelegate {
             }
             if let placemark = placemarks?.first {
                 let coordinates:CLLocationCoordinate2D = placemark.location!.coordinate
+                
                 print (coordinates)
                 
                 let controller = self.storyboard?.instantiateViewControllerWithIdentifier("linkView") as! LinkViewController
                 
                 controller.coordinates = coordinates
+                controller.placeMark = placemark
                 
                 self.presentViewController(controller, animated: true, completion: nil)
                 
