@@ -72,6 +72,70 @@ extension UdacityClient {
         
     }
     
+    class func postSessionNative(username: String, password: String, completionHandler: (Bool) -> Void) {
+    
+        SwiftSpinner.show("Authenticating...")
+        
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/session")!)
+        request.HTTPMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        //Make JSON out of it
+        let parameters: [ String : [String: AnyObject]] = [
+            "udacity": [
+                "username": username,
+                "password": password
+            ]
+        ]
+        
+        let jsonData = try! NSJSONSerialization.dataWithJSONObject(parameters, options: .PrettyPrinted)
+        
+        request.HTTPBody = jsonData
+        
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request) { data, response, error in
+            if error != nil { // Handle error…
+                
+                SwiftSpinner.show("Error", animated: false).addTapHandler({
+                    SwiftSpinner.hide()
+                })
+                
+                return
+            }
+            let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
+            print(NSString(data: newData, encoding: NSUTF8StringEncoding))
+            
+            let responseJSON = try! NSJSONSerialization.JSONObjectWithData(newData, options: NSJSONReadingOptions.MutableContainers) as? [String:AnyObject]
+            
+            print(responseJSON)
+            if let sesid = responseJSON?["session"]?["id"] {
+                SwiftSpinner.hide()
+                
+                completionHandler(true)
+                print(sesid)
+                
+                if let idNumber = responseJSON?["account"]?["key"]  {
+                    
+                    getPublicData(idNumber as! String)
+                    
+                }
+                
+            } else {
+                SwiftSpinner.show("Wrong credentials", animated: false).addTapHandler({
+                    SwiftSpinner.hide()
+                })
+                
+        }
+        
+        }
+        task.resume()
+        
+        //FIX ERROR HANDING
+    
+    
+    }
+    
     class func postSession(username: String, password: String, completionHandler: (Bool) -> Void) {
         
     SwiftSpinner.show("Authenticating...")

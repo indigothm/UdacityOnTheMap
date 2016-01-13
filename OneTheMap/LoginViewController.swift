@@ -60,7 +60,26 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.view.endEditing(true)
         
         guard usernameTextField.text!.isEmpty && passwordTextField.text!.isEmpty else {
-            UdacityClient.postSession(usernameTextField.text!, password: passwordTextField.text!, completionHandler: {status in
+            
+            print("ACHTUNG TESTEN GEHEN")
+            
+            UdacityClient.postSessionNative(usernameTextField.text!, password: passwordTextField.text!, completionHandler: {status in
+            
+                if status {
+                    
+                    print("TRANSITION TEST")
+                    
+                    dispatch_async(dispatch_get_main_queue(), {
+                        
+                        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("rootView") as! UITabBarController
+                        self.presentViewController(controller, animated: true, completion: nil)
+                        
+                        
+                    })
+                }
+                
+            })
+         /*   UdacityClient.postSession(usernameTextField.text!, password: passwordTextField.text!, completionHandler: {status in
             
                 if status {
                     
@@ -76,11 +95,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 }
                 
             })
+            */
             return
         }
         
         
 
+            
+        
         
     }
     
