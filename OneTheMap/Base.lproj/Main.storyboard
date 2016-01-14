@@ -114,7 +114,7 @@
         <!--Map-->
         <scene sceneID="PbN-Tw-Ecd">
             <objects>
-                <viewController id="Vo9-qM-6ud" customClass="MapViewController" customModule="OneTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mapV" id="Vo9-qM-6ud" customClass="MapViewController" customModule="OneTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wAr-9w-oNv"/>
                         <viewControllerLayoutGuide type="bottom" id="wrv-rh-rxh"/>
@@ -327,6 +327,9 @@
                                 <state key="normal" title="Cancel">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="cancelDidTouch:" destination="5b6-p0-wCH" eventType="touchUpInside" id="i5j-cw-j98"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter a link to share" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sPx-ON-paX">
                                 <rect key="frame" x="214" y="79" width="172" height="23"/>
@@ -397,6 +400,9 @@
                                 <state key="normal" title="Cancel">
                                     <color key="titleColor" red="0.0078431372550000003" green="0.22352941179999999" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="cancelDidTouch:" destination="v1T-zW-lLa" eventType="touchUpInside" id="DRW-Yw-1ey"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Where are you" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RaR-Fh-Dlc">
                                 <rect key="frame" x="101" y="68" width="119" height="23"/>

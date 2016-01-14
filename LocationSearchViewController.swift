@@ -11,6 +11,12 @@ import MapKit
 
 class LocationSearchViewController: UIViewController, UITextFieldDelegate {
     
+    @IBAction func cancelDidTouch(sender: AnyObject) {
+        
+        
+        self.presentingViewController!.dismissViewControllerAnimated(true, completion: {})
+    }
+    
     var tapRecognizer: UITapGestureRecognizer? = nil
     var keyboardAdjusted = false
     var lastKeyboardOffset : CGFloat = 0.0

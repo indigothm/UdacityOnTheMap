@@ -16,6 +16,12 @@ class LinkViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var linkTextField: UITextField!
     
+    @IBAction func cancelDidTouch(sender: AnyObject) {
+                
+        self.presentingViewController!.presentingViewController!.dismissViewControllerAnimated(true, completion: {})
+        
+    }
+    
     var tapRecognizer: UITapGestureRecognizer? = nil
     var coordinates: CLLocationCoordinate2D!
     var placeMark: CLPlacemark!
@@ -50,14 +56,13 @@ class LinkViewController: UIViewController, UITextFieldDelegate {
         print(UserLocation.mapString)
         print(UserLocation.key)
         //deploy POST METHOD
+        
+        //test POST method
         UdacityClient.postLocation(UserLocation.key, firstName: UserLocation.firstname, lastName: UserLocation.lastname, mapString: UserLocation.mapString, mediaURL: UserLocation.mediaURL, latitude: UserLocation.latitude, longitude: UserLocation.longitude, completionHandler: { status in
             
             if status {
                 
-                self.dismissViewControllerAnimated(true, completion: {
-                    print("dismissed")
-                });
-            
+               self.presentingViewController!.dismissViewControllerAnimated(true, completion: {})
             }
         
         })
