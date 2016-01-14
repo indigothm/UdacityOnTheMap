@@ -39,6 +39,13 @@ class LinkViewController: UIViewController, UITextFieldDelegate {
         self.map.addAnnotation(MKPlacemark(placemark: placeMark))
     }
 
+    @IBAction func submitButtonDidTouch(sender: AnyObject) {
+        
+        UserLocation.mediaURL = linkTextField.text
+        
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

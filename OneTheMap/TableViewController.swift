@@ -35,7 +35,7 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         mainTableView.delegate = self
         mainTableView.dataSource = self
         
-        UdacityClient.getLocations({ data in
+        UdacityClient.getLocationsNative({ data in
             
             print(data)
             

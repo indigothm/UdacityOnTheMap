@@ -8,11 +8,86 @@
 
 import Foundation
 import UIKit
-import Alamofire
-import SwiftyJSON
+//import Alamofire
+//import SwiftyJSON
 import SwiftSpinner
 
 extension UdacityClient {
+    
+    class func getLocationsNative(completionHandler: ([LocationPost]) -> Void) -> Void {
+    
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation")!)
+        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request) { data, response, error in
+            if error != nil { // Handle error...
+                return
+            }
+            print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+            
+            if let JSONData = data {
+                
+                // Check 1
+                if let json: AnyObject = try! NSJSONSerialization.JSONObjectWithData(JSONData, options: NSJSONReadingOptions.MutableContainers) {
+                    
+                    // Check 2
+                    if let jsonDictionary = json as? NSDictionary {
+                        
+                        // Check 3
+                        print("Dictionary received")
+                        print(jsonDictionary)
+                        
+                        let dataArray = jsonDictionary["results"] as! NSArray
+                        
+                        var locationArray: [LocationPost] = []
+                        
+                        for subJson in dataArray  {
+                            
+                            let pinPoint: LocationPost = LocationPost(
+                                
+                                firstname: subJson["firstName"]! as! String,
+                                lastname: subJson["lastName"]! as! String!,
+                                mediaUrl: subJson["mediaURL"]! as! String!,
+                            
+                                latitude: subJson["latitude"]! as! Double,
+                                longitude: subJson["longitude"] as! Double
+                                
+                            )
+                            
+                            
+                            locationArray.append(pinPoint)
+                            
+                            
+                        }
+                        
+                        print("LOCATIONS")
+                        print(locationArray)
+                        completionHandler(locationArray)
+                        
+                    }
+                    else {
+                        if let jsonString = NSString(data: JSONData, encoding: NSUTF8StringEncoding) {
+                            print("JSON String: \n\n \(jsonString)")
+                        }
+                        fatalError("JSON does not contain a dictionary \(json)")
+                    }
+                }
+                else {
+                    fatalError("Can't parse JSON")
+                }
+            }
+            else {
+                fatalError("JSONData is nil")
+            }
+            
+        }
+        task.resume()
+    
+    }
+    
+    
+    /*
     
     class func getLocations(completionHandler: ([LocationPost]) -> Void) -> Void {
         
@@ -35,7 +110,7 @@ extension UdacityClient {
                     
                     var locationArray: [LocationPost] = []
                     
-                    for (key, subJson) in json["results"] {
+                    for (_, subJson) in json["results"] {
                         
                         let pinPoint: LocationPost = LocationPost(
                             
@@ -71,6 +146,8 @@ extension UdacityClient {
         })
         
     }
+
+*/
     
     class func postSessionNative(username: String, password: String, completionHandler: (Bool) -> Void) {
     
@@ -112,9 +189,9 @@ extension UdacityClient {
             
             print(responseJSON)
 
-            if let status = responseJSON?["status"] {
+            if let _ = responseJSON?["status"] {
                 
-                print("Status")
+                print("Wrong credentials with status code")
                 
             
                 SwiftSpinner.show("Wrong credentials", animated: false).addTapHandler({
@@ -132,7 +209,7 @@ extension UdacityClient {
                 
                 if let idNumber = responseJSON?["account"]?["key"]  {
                     
-                    getPublicData(idNumber as! String)
+                    getPublicDataNative(idNumber as! String)
                     
                 }
                 
@@ -150,6 +227,8 @@ extension UdacityClient {
     
     }
     
+    /*
+    
     class func postSession(username: String, password: String, completionHandler: (Bool) -> Void) {
         
     SwiftSpinner.show("Authenticating...")
@@ -162,6 +241,8 @@ extension UdacityClient {
         ]
     
     print("works")
+        
+  
         
     Alamofire.request(.POST, "https://www.udacity.com/api/session", parameters: parameters, encoding: .JSON).responseString(completionHandler: { (response) in
         
@@ -219,8 +300,10 @@ extension UdacityClient {
     
     
     }
+
+*/
     
-    class func getPublicData(key: String) {
+  /*  class func getPublicData(key: String) {
         
         print("GETTING PUBLIC DATA")
     
@@ -239,6 +322,44 @@ extension UdacityClient {
         })
         
     
+    }
+
+*/
+    
+    class func getPublicDataNative(key: String) {
+    
+        print("GETTING PUBLIC DATA")
+        
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/users/" + key)!)
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request) { data, response, error in
+            if error != nil { // Handle error...
+                return
+            }
+            
+            let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
+            print(NSString(data: newData, encoding: NSUTF8StringEncoding))
+            
+            
+            let responseJSON = try! NSJSONSerialization.JSONObjectWithData(newData, options: NSJSONReadingOptions.MutableContainers) as? [String:AnyObject]
+            
+            print(responseJSON)
+            
+            print("data for the post func")
+            
+            print(responseJSON?["user"]!["key"]! as! String)
+            print(responseJSON?["user"]!["last_name"]! as! String)
+            print(responseJSON?["user"]!["nickname"]! as! String)
+            
+            UserLocation.firstname = responseJSON?["user"]!["nickname"]! as! String
+            UserLocation.lastname = responseJSON?["user"]!["last_name"]! as! String
+            UserLocation.lastname = responseJSON?["user"]!["key"]! as! String
+            
+            
+            
+        }
+        task.resume()
+        
     }
     
 

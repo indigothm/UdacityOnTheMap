@@ -76,6 +76,10 @@ class LocationSearchViewController: UIViewController, UITextFieldDelegate {
                 controller.coordinates = coordinates
                 controller.placeMark = placemark
                 
+                UserLocation.mapString = address!
+                UserLocation.longitude = coordinates.longitude
+                UserLocation.latitude = coordinates.latitude
+                
                 self.presentViewController(controller, animated: true, completion: nil)
                 
             }

@@ -60,9 +60,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.view.endEditing(true)
         
         guard usernameTextField.text!.isEmpty && passwordTextField.text!.isEmpty else {
-            
-            print("ACHTUNG TESTEN GEHEN")
-            
+                        
             UdacityClient.postSessionNative(usernameTextField.text!, password: passwordTextField.text!, completionHandler: {status in
             
                 if status {
