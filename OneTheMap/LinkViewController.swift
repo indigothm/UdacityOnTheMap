@@ -42,6 +42,25 @@ class LinkViewController: UIViewController, UITextFieldDelegate {
     @IBAction func submitButtonDidTouch(sender: AnyObject) {
         
         UserLocation.mediaURL = linkTextField.text
+        print(UserLocation.mediaURL)
+        print(UserLocation.firstname)
+        print(UserLocation.latitude)
+        print(UserLocation.longitude)
+        print(UserLocation.lastname)
+        print(UserLocation.mapString)
+        print(UserLocation.key)
+        //deploy POST METHOD
+        UdacityClient.postLocation(UserLocation.key, firstName: UserLocation.firstname, lastName: UserLocation.lastname, mapString: UserLocation.mapString, mediaURL: UserLocation.mediaURL, latitude: UserLocation.latitude, longitude: UserLocation.longitude, completionHandler: { status in
+            
+            if status {
+                
+                self.dismissViewControllerAnimated(true, completion: {
+                    print("dismissed")
+                });
+            
+            }
+        
+        })
         
         
     }

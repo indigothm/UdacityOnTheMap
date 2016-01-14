@@ -19,4 +19,5 @@ struct UserLocation {
     static var latitude: CLLocationDegrees!
     static var longitude: CLLocationDegrees!
     
+    
 }

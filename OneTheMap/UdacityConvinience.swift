@@ -14,6 +14,52 @@ import SwiftSpinner
 
 extension UdacityClient {
     
+    //completionHandler: (Bool) -> Void
+    
+    class func postLocation(uniqueKey: String, firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: AnyObject, longitude: AnyObject, completionHandler: (Bool) -> Void) -> Void {
+        
+        print("PARAMS TESTS")
+        print(uniqueKey)
+        print(firstName)
+        
+        //Make JSON out of it
+        let parameters: [ String : AnyObject] = [
+            
+                "uniqueKey": uniqueKey,
+                "firstName": firstName,
+                "lastName": lastName,
+                "mapString": mapString,
+                "mediaURL": mediaURL,
+                "latitude": latitude,
+                "longitude": longitude
+        ]
+        
+        let jsonData = try! NSJSONSerialization.dataWithJSONObject(parameters, options: .PrettyPrinted)
+        
+        
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation")!)
+        request.HTTPMethod = "POST"
+        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.HTTPBody = jsonData
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request) { data, response, error in
+            if error != nil { // Handle error…
+                return
+            }
+            
+            print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+        
+            print("SUCCESS")
+            
+            completionHandler(true)
+
+        }
+        task.resume()
+        
+    }
+    
     class func getLocationsNative(completionHandler: ([LocationPost]) -> Void) -> Void {
     
         let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation")!)
@@ -353,7 +399,7 @@ extension UdacityClient {
             
             UserLocation.firstname = responseJSON?["user"]!["nickname"]! as! String
             UserLocation.lastname = responseJSON?["user"]!["last_name"]! as! String
-            UserLocation.lastname = responseJSON?["user"]!["key"]! as! String
+            UserLocation.key = responseJSON?["user"]!["key"]! as! String
             
             
             
