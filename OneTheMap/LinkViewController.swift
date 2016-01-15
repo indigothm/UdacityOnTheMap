@@ -62,7 +62,7 @@ class LinkViewController: UIViewController, UITextFieldDelegate {
             
             if status {
                 
-               self.presentingViewController!.dismissViewControllerAnimated(true, completion: {})
+               self.presentingViewController!.presentingViewController!.dismissViewControllerAnimated(true, completion: {})
             }
         
         })

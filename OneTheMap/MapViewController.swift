@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import SwiftSpinner
 
 class MapViewController: UIViewController, UINavigationBarDelegate  {
 
@@ -22,6 +23,40 @@ class MapViewController: UIViewController, UINavigationBarDelegate  {
         
     }
 
+    @IBAction func refreshDidTouch(sender: AnyObject) {
+        
+        SwiftSpinner.show("Loading...")
+        
+        UdacityClient.getLocationsNative({ data in
+            
+            dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+            
+            
+            
+            guard data.isEmpty else {
+            
+            print(data)
+            
+            for point in data {
+                
+                self.mapView.addAnnotation(point)
+                
+            }
+                
+            SwiftSpinner.hide()
+                
+            return
+                
+            }
+                
+            
+                
+            }
+            
+        })
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,12 +64,20 @@ class MapViewController: UIViewController, UINavigationBarDelegate  {
         
         UdacityClient.getLocationsNative({ data in
             
+            dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+                
+            SwiftSpinner.show("Loading...")    
+            
             print(data)
             
             for point in data {
             
             self.mapView.addAnnotation(point)
+                
+            SwiftSpinner.hide()
             
+            }
+                
             }
         
             })

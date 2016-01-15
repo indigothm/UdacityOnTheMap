@@ -132,7 +132,11 @@
                                     <navigationItem title="On The Map" id="QAK-XV-oxr">
                                         <barButtonItem key="leftBarButtonItem" title="Logout" id="kMF-Fg-dt3"/>
                                         <rightBarButtonItems>
-                                            <barButtonItem systemItem="refresh" id="JMB-8x-DED"/>
+                                            <barButtonItem systemItem="refresh" id="JMB-8x-DED">
+                                                <connections>
+                                                    <action selector="refreshDidTouch:" destination="Vo9-qM-6ud" id="dDN-6t-htd"/>
+                                                </connections>
+                                            </barButtonItem>
                                             <barButtonItem image="Pin" id="eRH-ts-bsE">
                                                 <connections>
                                                     <action selector="addBtnDidTouch:" destination="Vo9-qM-6ud" id="3B3-Et-ey2"/>
@@ -192,7 +196,11 @@
                                     <navigationItem title="On The Map" id="XNw-rW-9Ac">
                                         <barButtonItem key="leftBarButtonItem" title="Logout" id="F3a-pt-5PH"/>
                                         <rightBarButtonItems>
-                                            <barButtonItem systemItem="refresh" id="b9Z-Wg-7W4"/>
+                                            <barButtonItem systemItem="refresh" id="b9Z-Wg-7W4">
+                                                <connections>
+                                                    <action selector="refreshDidTouch:" destination="axU-2F-Z1J" id="lOP-8i-VL6"/>
+                                                </connections>
+                                            </barButtonItem>
                                             <barButtonItem image="Pin" id="abs-Ay-4p8">
                                                 <connections>
                                                     <action selector="addBtnDidTouch:" destination="axU-2F-Z1J" id="yyS-ce-baR"/>
@@ -331,7 +339,7 @@
                                     <action selector="cancelDidTouch:" destination="5b6-p0-wCH" eventType="touchUpInside" id="i5j-cw-j98"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter a link to share" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sPx-ON-paX">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter a link to share" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="sPx-ON-paX">
                                 <rect key="frame" x="214" y="79" width="172" height="23"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>

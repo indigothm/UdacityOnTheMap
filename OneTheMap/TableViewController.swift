@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftSpinner
 
 class TableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UINavigationBarDelegate {
     
@@ -15,6 +16,33 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var tableViewMain: UITableView!
     
     var dataArray: [LocationPost] = []
+    
+    @IBAction func refreshDidTouch(sender: AnyObject) {
+        
+        SwiftSpinner.show("Loading...")
+        
+        UdacityClient.getLocationsNative({ data in
+            
+            guard data.isEmpty else {
+                
+            print(data)
+
+            self.dataArray = data
+            self.tableViewMain.reloadData()
+                
+            SwiftSpinner.hide()
+             
+            return
+            }
+            
+            
+            
+            
+            
+        })
+
+        
+    }
     
     func positionForBar(bar: UIBarPositioning) -> UIBarPosition {
         return UIBarPosition.TopAttached
@@ -37,13 +65,24 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         UdacityClient.getLocationsNative({ data in
             
-            print(data)
             
+            dispatch_async(dispatch_get_main_queue()) { [unowned self] in
+                
+            SwiftSpinner.show("Loading...")
             
+            guard data.isEmpty else {
+                
+                print(data)
                 
                 self.dataArray = data
                 self.tableViewMain.reloadData()
                 
+                SwiftSpinner.hide()
+                
+                return
+            }
+                
+            }
             
             
         })
