@@ -15,6 +15,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Properties
     
+    @IBAction func register(sender: AnyObject) {
+        
+        var url : NSURL
+        url = NSURL(string: "https://www.udacity.com/account/auth#!/signup")!
+        UIApplication.sharedApplication().openURL(url)
+        
+    }
+    
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: BorderedButton!

@@ -15,6 +15,14 @@ class MapViewController: UIViewController, UINavigationBarDelegate  {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var navBar: UINavigationBar!
     
+    @IBAction func logoutDidTouch(sender: AnyObject) {
+        
+        UdacityClient.logOut()
+        self.dismissViewControllerAnimated(false, completion: nil)
+        print("done")
+        
+    }
+    
     @IBAction func addBtnDidTouch(sender: AnyObject) {
         
         let controller  = self.storyboard!.instantiateViewControllerWithIdentifier("locationViewController") as! LocationSearchViewController
@@ -22,6 +30,7 @@ class MapViewController: UIViewController, UINavigationBarDelegate  {
         self.presentViewController(controller, animated: true, completion: nil)
         
     }
+    
 
     @IBAction func refreshDidTouch(sender: AnyObject) {
         
@@ -66,7 +75,7 @@ class MapViewController: UIViewController, UINavigationBarDelegate  {
             
             dispatch_async(dispatch_get_main_queue()) { [unowned self] in
                 
-            SwiftSpinner.show("Loading...")    
+            SwiftSpinner.show("Loading...")
             
             print(data)
             
@@ -100,6 +109,8 @@ class MapViewController: UIViewController, UINavigationBarDelegate  {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+
     
 
     /*

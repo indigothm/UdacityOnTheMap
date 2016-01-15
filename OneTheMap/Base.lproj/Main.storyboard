@@ -84,6 +84,9 @@
                                 <state key="normal" title="Sign Up">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="register:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0f0-if-Jtl"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.54117647058823526" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -130,7 +133,11 @@
                                 <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <items>
                                     <navigationItem title="On The Map" id="QAK-XV-oxr">
-                                        <barButtonItem key="leftBarButtonItem" title="Logout" id="kMF-Fg-dt3"/>
+                                        <barButtonItem key="leftBarButtonItem" title="Logout" id="kMF-Fg-dt3">
+                                            <connections>
+                                                <action selector="logoutDidTouch:" destination="Vo9-qM-6ud" id="smo-Y2-wn3"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <rightBarButtonItems>
                                             <barButtonItem systemItem="refresh" id="JMB-8x-DED">
                                                 <connections>
@@ -194,7 +201,11 @@
                                 <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <items>
                                     <navigationItem title="On The Map" id="XNw-rW-9Ac">
-                                        <barButtonItem key="leftBarButtonItem" title="Logout" id="F3a-pt-5PH"/>
+                                        <barButtonItem key="leftBarButtonItem" title="Logout" id="F3a-pt-5PH">
+                                            <connections>
+                                                <action selector="logoutAction:" destination="axU-2F-Z1J" id="h3t-87-N8L"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <rightBarButtonItems>
                                             <barButtonItem systemItem="refresh" id="b9Z-Wg-7W4">
                                                 <connections>

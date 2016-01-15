@@ -15,6 +15,14 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var tableViewMain: UITableView!
     
+    @IBAction func logoutAction(sender: AnyObject) {
+        
+        UdacityClient.logOut()
+        self.dismissViewControllerAnimated(false, completion: nil)
+        print("done")
+        
+    }
+    
     var dataArray: [LocationPost] = []
     
     @IBAction func refreshDidTouch(sender: AnyObject) {
@@ -120,9 +128,20 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        //will work on it later
+        print("OPEN SAFARI")
+        
+        var url : NSURL
+        
+        url = NSURL(string: dataArray[indexPath.row].mediaUrl)!
+        
+        print(url)
+    UIApplication.sharedApplication().openURL(url)
+        
+        
         
     }
+    
+    
     
 
     /*
