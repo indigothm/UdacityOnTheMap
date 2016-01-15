@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import SwiftSpinner
 
-class MapViewController: UIViewController, UINavigationBarDelegate  {
+class MapViewController: UIViewController, UINavigationBarDelegate, MKMapViewDelegate  {
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var navBar: UINavigationBar!
@@ -46,11 +46,13 @@ class MapViewController: UIViewController, UINavigationBarDelegate  {
             
             print(data)
             
+            
             for point in data {
                 
                 self.mapView.addAnnotation(point)
                 
             }
+
                 
             SwiftSpinner.hide()
                 
@@ -66,10 +68,67 @@ class MapViewController: UIViewController, UINavigationBarDelegate  {
         
     }
     
+    
+    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+        
+        let identifier = "Location"
+        
+        
+        if annotation.isKindOfClass(LocationPost.self) {
+            
+            var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier)
+            
+            if annotationView == nil {
+                
+                annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                annotationView!.canShowCallout = true
+                
+                
+                let btn = UIButton(type: .DetailDisclosure)
+                annotationView!.rightCalloutAccessoryView = btn
+            } else {
+                
+                annotationView!.annotation = annotation
+            }
+            
+            return annotationView
+        }
+        
+        
+        return nil
+    }
+    
+    func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
+        
+        let location = view.annotation as! LocationPost
+        let url = location.subtitle
+        
+        if url!.rangeOfString("https://") == nil{
+            print("adding https")
+            
+            let newS = "https://" + url!
+            
+            var exitUrl : NSURL
+            exitUrl = NSURL(string: newS)!
+            UIApplication.sharedApplication().openURL(exitUrl)
+            
+        } else {
+        
+        var exitUrl : NSURL
+        exitUrl = NSURL(string: url!)!
+        UIApplication.sharedApplication().openURL(exitUrl)
+            
+        }
+        
+        
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navBar.delegate = self
+        mapView.delegate = self
         
         UdacityClient.getLocationsNative({ data in
             
