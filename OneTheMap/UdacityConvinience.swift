@@ -8,21 +8,13 @@
 
 import Foundation
 import UIKit
-//import Alamofire
-//import SwiftyJSON
 import SwiftSpinner
 
 extension UdacityClient {
     
-    //completionHandler: (Bool) -> Void
     
     class func postLocation(uniqueKey: String, firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: AnyObject, longitude: AnyObject, completionHandler: (Bool) -> Void) -> Void {
         
-        print("PARAMS TESTS")
-        print(uniqueKey)
-        print(firstName)
-        
-        //Make JSON out of it
         let parameters: [ String : AnyObject] = [
             
                 "uniqueKey": uniqueKey,
@@ -45,7 +37,7 @@ extension UdacityClient {
         request.HTTPBody = jsonData
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
-            if error != nil { // Handle error…
+            if error != nil {
                 return
             }
             
@@ -91,20 +83,25 @@ extension UdacityClient {
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
-            if error != nil { // Handle error...
+            if error != nil {
+                
+                
+                let alert = UIAlertView()
+                alert.title = "Download Error"
+                alert.message = "Something went wrong"
+                alert.addButtonWithTitle("Understod")
+                alert.show()
+                
                 return
             }
             print(NSString(data: data!, encoding: NSUTF8StringEncoding))
             
             if let JSONData = data {
                 
-                // Check 1
                 if let json: AnyObject = try! NSJSONSerialization.JSONObjectWithData(JSONData, options: NSJSONReadingOptions.MutableContainers) {
                     
-                    // Check 2
                     if let jsonDictionary = json as? NSDictionary {
                         
-                        // Check 3
                         print("Dictionary received")
                         print(jsonDictionary)
                         
@@ -157,68 +154,6 @@ extension UdacityClient {
     }
     
     
-    /*
-    
-    class func getLocations(completionHandler: ([LocationPost]) -> Void) -> Void {
-        
-        Alamofire.request(.GET, "https://api.parse.com/1/classes/StudentLocation", headers: ["X-Parse-Application-Id": "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", "X-Parse-REST-API-Key": "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"]).responseJSON(completionHandler: { (response) in
-        
-            print("TEST2")
-            print(response)
-            
-            switch response.result {
-            case .Success:
-                
-                if let value = response.result.value {
-                    
-                    
-                        SwiftSpinner.hide()
-                        let json = JSON(value)
-                        print("JSON: \(json)")
-                    
-                        print(json["results"][1]["latitude"])
-                    
-                    var locationArray: [LocationPost] = []
-                    
-                    for (_, subJson) in json["results"] {
-                        
-                        let pinPoint: LocationPost = LocationPost(
-                            
-                            firstname: subJson["firstName"].string!,
-                            lastname: subJson["lastName"].string!,
-                            mediaUrl: subJson["mediaURL"].string!,
-                            latitude: subJson["latitude"].double!,
-                            longitude: subJson["longitude"].double!
-                            
-                        )
-                        
-                        locationArray.append(pinPoint)
-                    
-                        
-                    }
-                    
-                    completionHandler(locationArray)
-               
-                    
-                    
-                }
-                
-            case .Failure(let error):
-                print(error)
-                SwiftSpinner.show("Connection Error", animated: false).addTapHandler({
-                    SwiftSpinner.hide()
-                })
-                
-                
-            }
-
-            
-        })
-        
-    }
-
-*/
-    
     class func postSessionNative(username: String, password: String, completionHandler: (Bool) -> Void) {
     
         SwiftSpinner.show("Authenticating...")
@@ -228,7 +163,6 @@ extension UdacityClient {
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        //Make JSON out of it
         let parameters: [ String : [String: AnyObject]] = [
             "udacity": [
                 "username": username,
@@ -297,105 +231,6 @@ extension UdacityClient {
     
     }
     
-    /*
-    
-    class func postSession(username: String, password: String, completionHandler: (Bool) -> Void) {
-        
-    SwiftSpinner.show("Authenticating...")
-            
-    let parameters: [ String : [String: AnyObject]] = [
-            "udacity": [
-            "username": username,
-            "password": password
-            ]
-        ]
-    
-    print("works")
-        
-  
-        
-    Alamofire.request(.POST, "https://www.udacity.com/api/session", parameters: parameters, encoding: .JSON).responseString(completionHandler: { (response) in
-        
-        
-            print(response.result)
-
-            switch response.result {
-                case .Success:
-                    
-                    if let value = response.result.value {
-                        
-                        var data = value as String!
-                        let range = NSMakeRange(0,5)
-                        data.deleteCharactersInRange(range)
-                        
-                        if let dataFromString = data.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
-                            let json = JSON(data: dataFromString)
-                            
-                            print("JSON: \(json)")
-                            print(json["session"]["id"])
-                            
-                            if let _ = json["session"]["id"].string {
-                            SwiftSpinner.hide()
-                            completionHandler(true)
-                                
-                                if let idNumber = json["account"]["key"].string {
-                                    
-                                    getPublicData(idNumber)
-                                    
-                                }
-                                
-                            } else {
-                                SwiftSpinner.show("Wrong credentials", animated: false).addTapHandler({
-                                    SwiftSpinner.hide()
-                                })
-
-                            }
-        
-                        }
-                
-                }
-                
-                case .Failure(let error):
-                    print(error)
-                    SwiftSpinner.show("Connection Error", animated: false).addTapHandler({
-                        SwiftSpinner.hide()
-                    })
-                
-                
-        }
-        
-        })
-    
-
-    
-    
-    }
-
-*/
-    
-  /*  class func getPublicData(key: String) {
-        
-        print("GETTING PUBLIC DATA")
-    
-        Alamofire.request(.GET, "https://www.udacity.com/api/users/" + key).response(completionHandler: { (response) in
-            
-            print("DISPLAYING")
-            
-            let data = response.2
-            
-            let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5))
-            
-            print(NSString(data: newData, encoding: NSUTF8StringEncoding))
-            
-            
-        
-        })
-        
-    
-    }
-
-*/
-    
     class func getPublicDataNative(key: String) {
     
         print("GETTING PUBLIC DATA")
@@ -403,7 +238,14 @@ extension UdacityClient {
         let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/users/" + key)!)
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
-            if error != nil { // Handle error...
+            if error != nil {
+                
+                let alert = UIAlertView()
+                alert.title = "Download Error"
+                alert.message = "Something went wrong"
+                alert.addButtonWithTitle("Understod")
+                alert.show()
+                
                 return
             }
             
@@ -432,17 +274,27 @@ extension UdacityClient {
         
     }
     
-
-}
-
-
-extension String {
-    mutating func deleteCharactersInRange(range: NSRange) {
+    class func openSafari(urlString: String) {
         
-        let length = range.length
-        let startIndex = self.startIndex
-        let endIndex = self.startIndex.advancedBy(length)
-    self.removeRange(Range<String.Index>(start: startIndex, end: endIndex))
+        if urlString.rangeOfString("https://") == nil{
+            
+            print("adding https")
+            
+            let newS = "https://" + urlString
+            
+            var exitUrl : NSURL
+            exitUrl = NSURL(string: newS)!
+            UIApplication.sharedApplication().openURL(exitUrl)
+            
+        } else {
+            
+            var exitUrl : NSURL
+            exitUrl = NSURL(string: urlString)!
+            UIApplication.sharedApplication().openURL(exitUrl)
+            
+        }
         
     }
+    
+
 }

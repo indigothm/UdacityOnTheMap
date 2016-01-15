@@ -83,19 +83,14 @@
 		3F393A551C39096600DCDC2B /* OneTheMap */ = {
 			isa = PBXGroup;
 			children = (
+				3F393A621C39096600DCDC2B /* Info.plist */,
+				3F393A561C39096600DCDC2B /* AppDelegate.swift */,
+				3F393A5A1C39096600DCDC2B /* Main.storyboard */,
+				3FB4DC521C49799300A0EFDC /* Controller */,
 				3F393A6B1C3A58D000DCDC2B /* Model */,
 				3F393A6A1C3A58C400DCDC2B /* View */,
-				3F393A561C39096600DCDC2B /* AppDelegate.swift */,
-				3FB4DC461C41B5A900A0EFDC /* LinkViewController.swift */,
-				3FB4DC4C1C44A3D200A0EFDC /* TableViewCell.swift */,
-				3F393A581C39096600DCDC2B /* LoginViewController.swift */,
-				3FB4DC441C41705400A0EFDC /* LocationSearchViewController.swift */,
-				3FB4DC3C1C3F535600A0EFDC /* MapViewController.swift */,
-				3FB4DC3E1C3F571E00A0EFDC /* TableViewController.swift */,
-				3F393A5A1C39096600DCDC2B /* Main.storyboard */,
 				3F393A5D1C39096600DCDC2B /* Assets.xcassets */,
 				3F393A5F1C39096600DCDC2B /* LaunchScreen.storyboard */,
-				3F393A621C39096600DCDC2B /* Info.plist */,
 			);
 			path = OneTheMap;
 			sourceTree = "<group>";
@@ -104,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				3F393A681C390F3900DCDC2B /* BorderedButton.swift */,
+				3FB4DC4C1C44A3D200A0EFDC /* TableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -118,6 +114,18 @@
 				3FB4DC501C48893D00A0EFDC /* UdacityData.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		3FB4DC521C49799300A0EFDC /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3FB4DC461C41B5A900A0EFDC /* LinkViewController.swift */,
+				3F393A581C39096600DCDC2B /* LoginViewController.swift */,
+				3FB4DC441C41705400A0EFDC /* LocationSearchViewController.swift */,
+				3FB4DC3C1C3F535600A0EFDC /* MapViewController.swift */,
+				3FB4DC3E1C3F571E00A0EFDC /* TableViewController.swift */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 		80F4270E05A3039F69BB7E4D /* Pods */ = {

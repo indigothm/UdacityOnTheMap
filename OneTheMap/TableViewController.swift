@@ -116,8 +116,6 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let cell = tableView.dequeueReusableCellWithIdentifier("main", forIndexPath: indexPath) as! TableViewCell
         
         let row = indexPath.row
-        //cell.textLabel?.text = swiftBlogs[row]
-        
         cell.nameLabel.text = dataArray[row].firstname
         cell.infoLabel.text = dataArray[row].mediaUrl
         
@@ -130,28 +128,11 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         print("OPEN SAFARI")
         
-        var url : NSURL
-        
-        url = NSURL(string: dataArray[indexPath.row].mediaUrl)!
-        
-        print(url)
-    UIApplication.sharedApplication().openURL(url)
+        UdacityClient.openSafari(dataArray[indexPath.row].mediaUrl)
         
         
         
     }
     
-    
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

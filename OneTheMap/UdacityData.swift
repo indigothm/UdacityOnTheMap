@@ -10,6 +10,12 @@ import Foundation
 
 struct dataArray {
     
-    static var data: [LocationPost]!
+    var data: [LocationPost]
+    
+    init(data: [LocationPost]) {
+        
+        self.data = data
+        
+    }
     
 }

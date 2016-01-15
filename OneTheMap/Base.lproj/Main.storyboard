@@ -225,11 +225,11 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="main" rowHeight="70" id="Lwx-Fu-sNf" customClass="TableViewCell" customModule="OneTheMap" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="main" rowHeight="70" id="Lwx-Fu-sNf" customClass="TableViewCell" customModule="OneTheMap" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="600" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Lwx-Fu-sNf" id="6Pf-C9-5EY">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="69"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="567" height="69"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Target" translatesAutoresizingMaskIntoConstraints="NO" id="0nv-qJ-5Rn">
@@ -366,7 +366,7 @@
                                             <color key="titleColor" red="0.031372549020000001" green="0.16078431369999999" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="submitButtonDidTouch:" destination="5b6-p0-wCH" eventType="touchUpInside" id="NgL-j6-rR4"/>
+                                            <action selector="submitDidTouch:" destination="5b6-p0-wCH" eventType="touchUpInside" id="zlR-Fz-Sux"/>
                                         </connections>
                                     </button>
                                 </subviews>

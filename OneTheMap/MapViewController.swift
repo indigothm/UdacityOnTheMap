@@ -103,22 +103,7 @@ class MapViewController: UIViewController, UINavigationBarDelegate, MKMapViewDel
         let location = view.annotation as! LocationPost
         let url = location.subtitle
         
-        if url!.rangeOfString("https://") == nil{
-            print("adding https")
-            
-            let newS = "https://" + url!
-            
-            var exitUrl : NSURL
-            exitUrl = NSURL(string: newS)!
-            UIApplication.sharedApplication().openURL(exitUrl)
-            
-        } else {
-        
-        var exitUrl : NSURL
-        exitUrl = NSURL(string: url!)!
-        UIApplication.sharedApplication().openURL(exitUrl)
-            
-        }
+        UdacityClient.openSafari(url!)
         
         
     }
@@ -170,16 +155,5 @@ class MapViewController: UIViewController, UINavigationBarDelegate, MKMapViewDel
     }
     
 
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

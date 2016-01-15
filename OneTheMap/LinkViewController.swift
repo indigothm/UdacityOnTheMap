@@ -45,30 +45,7 @@ class LinkViewController: UIViewController, UITextFieldDelegate {
         self.map.addAnnotation(MKPlacemark(placemark: placeMark))
     }
 
-    @IBAction func submitButtonDidTouch(sender: AnyObject) {
-        
-        UserLocation.mediaURL = linkTextField.text
-        print(UserLocation.mediaURL)
-        print(UserLocation.firstname)
-        print(UserLocation.latitude)
-        print(UserLocation.longitude)
-        print(UserLocation.lastname)
-        print(UserLocation.mapString)
-        print(UserLocation.key)
-        //deploy POST METHOD
-        
-        //test POST method
-        UdacityClient.postLocation(UserLocation.key, firstName: UserLocation.firstname, lastName: UserLocation.lastname, mapString: UserLocation.mapString, mediaURL: UserLocation.mediaURL, latitude: UserLocation.latitude, longitude: UserLocation.longitude, completionHandler: { status in
-            
-            if status {
-                
-               self.presentingViewController!.presentingViewController!.dismissViewControllerAnimated(true, completion: {})
-            }
-        
-        })
-        
-        
-    }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -97,6 +74,39 @@ class LinkViewController: UIViewController, UITextFieldDelegate {
     }
 
 
+    @IBAction func submitDidTouch(sender: AnyObject) {
+        
+        
+        
+        UserLocation.mediaURL = self.linkTextField.text
+        print(UserLocation.mediaURL)
+        print(UserLocation.firstname)
+        print(UserLocation.latitude)
+        print(UserLocation.longitude)
+        print(UserLocation.lastname)
+        print(UserLocation.mapString)
+        print(UserLocation.key)
+        //deploy POST METHOD
+        
+        //test POST method
+        UdacityClient.postLocation(UserLocation.key, firstName: UserLocation.firstname, lastName: UserLocation.lastname, mapString: UserLocation.mapString, mediaURL: UserLocation.mediaURL, latitude: UserLocation.latitude, longitude: UserLocation.longitude, completionHandler: { status in
+            
+            if status {
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                
+                self.presentingViewController!.presentingViewController!.dismissViewControllerAnimated(true, completion: {})
+                    
+                })
+                
+            }
+            
+        })
+    
+        
+    }
+    
+    
     /*
     // MARK: - Navigation
 
