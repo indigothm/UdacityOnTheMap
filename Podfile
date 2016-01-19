@@ -4,8 +4,6 @@ use_frameworks!
 
 target 'OneTheMap' do
 
-pod 'Alamofire', '~> 3.0'
-pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
 pod "SwiftSpinner"
 
 end
