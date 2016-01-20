@@ -11,6 +11,15 @@ import MapKit
 
 class LocationSearchViewController: UIViewController, UITextFieldDelegate {
     
+    
+    func presentError(title: String, message: String) {
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+    }
+    
     @IBAction func cancelDidTouch(sender: AnyObject) {
         
         
@@ -66,6 +75,7 @@ class LocationSearchViewController: UIViewController, UITextFieldDelegate {
         geocoder.geocodeAddressString(address!, completionHandler: {(placemarks, error) -> Void in
             if((error) != nil){
                 print("Error", error)
+                
             }
             if let placemark = placemarks?.first {
                 let coordinates:CLLocationCoordinate2D = placemark.location!.coordinate

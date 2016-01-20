@@ -12,6 +12,16 @@ import SwiftSpinner
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
+    func presentError(title: String, message: String) {
+        
+        SwiftSpinner.hide()
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+    }
+    
     // MARK: Properties
     
     @IBAction func register(sender: AnyObject) {
@@ -68,7 +78,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         guard usernameTextField.text!.isEmpty && passwordTextField.text!.isEmpty else {
                         
-            UdacityClient.postSessionNative(usernameTextField.text!, password: passwordTextField.text!, completionHandler: {status in
+            UdacityClient.postSessionNative(usernameTextField.text!, password: passwordTextField.text!, completionHandler: {status, error, errorMessage in
             
                 if status {
                     
@@ -81,27 +91,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         
                         
                     })
+                } else {
+                
+                    self.presentError("Login Error", message: "Something went wrong")
+                
                 }
                 
             })
-         /*   UdacityClient.postSession(usernameTextField.text!, password: passwordTextField.text!, completionHandler: {status in
-            
-                if status {
-                    
-                    print("TRANSITION TEST")
-                    
-                    dispatch_async(dispatch_get_main_queue(), {
-                        
-                      let controller = self.storyboard!.instantiateViewControllerWithIdentifier("rootView") as! UITabBarController
-                      self.presentViewController(controller, animated: true, completion: nil)
-                      
-                        
-                    })
-                }
-                
-            })
-            */
-            return
+                   return
         }
         
         

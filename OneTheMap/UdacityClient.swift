@@ -11,7 +11,26 @@ import Alamofire
 
 class UdacityClient: NSObject {
 
-    
-    
+    class func openSafari(urlString: String) {
+        
+        if urlString.rangeOfString("https://") == nil{
+            
+            print("adding https")
+            
+            let newS = "https://" + urlString
+            
+            var exitUrl : NSURL
+            exitUrl = NSURL(string: newS)!
+            UIApplication.sharedApplication().openURL(exitUrl)
+            
+        } else {
+            
+            var exitUrl : NSURL
+            exitUrl = NSURL(string: urlString)!
+            UIApplication.sharedApplication().openURL(exitUrl)
+            
+        }
+        
+    }    
     
 }

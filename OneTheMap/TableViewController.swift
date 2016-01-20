@@ -15,6 +15,17 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var tableViewMain: UITableView!
     
+    
+    func presentError(title: String, message: String) {
+        
+        SwiftSpinner.hide()
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+    }
+    
     @IBAction func logoutAction(sender: AnyObject) {
         
         UdacityClient.logOut()
@@ -29,18 +40,32 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         SwiftSpinner.show("Loading...")
         
-        UdacityClient.getLocationsNative({ data in
+        UdacityClient.getLocationsNative({ data, error, errorMessage in
             
-            guard data.isEmpty else {
+            if let output = data  {
                 
-            print(data)
-
-            self.dataArray = data
+            self.dataArray = output
             self.tableViewMain.reloadData()
                 
             SwiftSpinner.hide()
              
-            return
+            
+            } else {
+            
+                
+                if error {
+                    
+                    self.presentError("Error", message: errorMessage)
+                    
+                } else
+                    
+                {
+                    
+                    self.presentError("Unknown Error", message: "Something went wrong")
+                    
+                }
+
+            
             }
             
             
@@ -71,29 +96,20 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         mainTableView.delegate = self
         mainTableView.dataSource = self
         
-        UdacityClient.getLocationsNative({ data in
-            
-            
             dispatch_async(dispatch_get_main_queue()) { [unowned self] in
                 
-            SwiftSpinner.show("Loading...")
-            
-            guard data.isEmpty else {
                 
-                print(data)
-                
-                self.dataArray = data
+                self.dataArray = StudentLocationsClient.sharedInstance.studentLocations
                 self.tableViewMain.reloadData()
                 
-                SwiftSpinner.hide()
                 
-                return
-            }
+                
+            
                 
             }
             
             
-        })
+
 
         
     }

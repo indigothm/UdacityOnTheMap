@@ -11,6 +11,14 @@ import MapKit
 import SwiftSpinner
 
 class LinkViewController: UIViewController, UITextFieldDelegate {
+    
+    func presentError(title: String, message: String) {
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+    }
 
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var linkTextField: UITextField!
@@ -88,7 +96,7 @@ class LinkViewController: UIViewController, UITextFieldDelegate {
         //deploy POST METHOD
         
         //test POST method
-        UdacityClient.postLocation(UserLocation.key, firstName: UserLocation.firstname, lastName: UserLocation.lastname, mapString: UserLocation.mapString, mediaURL: UserLocation.mediaURL, latitude: UserLocation.latitude, longitude: UserLocation.longitude, completionHandler: { status in
+        UdacityClient.postLocation(UserLocation.key, firstName: UserLocation.firstname, lastName: UserLocation.lastname, mapString: UserLocation.mapString, mediaURL: UserLocation.mediaURL, latitude: UserLocation.latitude, longitude: UserLocation.longitude, completionHandler: { status, error, errorMessage in
             
             if status {
                 
@@ -98,6 +106,21 @@ class LinkViewController: UIViewController, UITextFieldDelegate {
                     
                 })
                 
+            } else {
+                
+                if error {
+                    
+                    self.presentError("Error", message: errorMessage)
+                    
+                } else
+                    
+                {
+                    
+                    self.presentError("Unknown Error", message: "Something went wrong")
+                    
+                }
+
+            
             }
             
         })

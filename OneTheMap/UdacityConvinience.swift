@@ -13,7 +13,7 @@ import SwiftSpinner
 extension UdacityClient {
     
     
-    class func postLocation(uniqueKey: String, firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: AnyObject, longitude: AnyObject, completionHandler: (Bool) -> Void) -> Void {
+    class func postLocation(uniqueKey: String, firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: AnyObject, longitude: AnyObject, completionHandler: (Bool, error: Bool, errorMessage: String) -> Void) -> Void {
         
         let parameters: [ String : AnyObject] = [
             
@@ -39,8 +39,7 @@ extension UdacityClient {
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil {
                 
-                
-                
+                 completionHandler(false, error: true, errorMessage: "Posting Error")
                 
                 return
             }
@@ -49,7 +48,7 @@ extension UdacityClient {
         
             print("SUCCESS")
             
-            completionHandler(true)
+            completionHandler(true, error: false, errorMessage: "No Error")
 
         }
         task.resume()
@@ -80,28 +79,18 @@ extension UdacityClient {
         
     }
     
-    class func getLocationsNative(completionHandler: ([LocationPost]) -> Void) -> Void {
+    class func getLocationsNative(completionHandler: ([LocationPost]?, error: Bool, errorMessage: String) -> Void) -> Void {
     
         let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation?order=-updatedAt")!)
-        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue("", forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil {
                 
-          //QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr
-            
+            //QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr
                 
-                //Use errors using completion handler
-                
-                /* 
-                
-                var alert = UIAlertController(title: "Hey", message: "This is  one Alert", preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "Working!!", style: UIAlertActionStyle.Default, handler: nil))
-                self.presentViewController(alert, animated: true, completion: nil)
-                
-                */
-                
+                                
                 return
             }
             print(NSString(data: data!, encoding: NSUTF8StringEncoding))
@@ -122,7 +111,7 @@ extension UdacityClient {
                                 
                                 SwiftSpinner.hide()
                             
-                            
+                                completionHandler(nil, error: true, errorMessage: "Connection Error")
                             
                             
                                 return
@@ -150,7 +139,7 @@ extension UdacityClient {
                                 
                                 
                                 StudentLocationsClient.sharedInstance.studentLocations.append(pinPoint)
-                                //test
+                               
                                 
                             }
                             
@@ -158,14 +147,14 @@ extension UdacityClient {
                             print(StudentLocationsClient.sharedInstance.studentLocations)
                             
                             
-                            completionHandler(StudentLocationsClient.sharedInstance.studentLocations)
+                            completionHandler(StudentLocationsClient.sharedInstance.studentLocations, error: false, errorMessage: "No Error")
 
                             
                         
                         } else {
                         
                          
-
+                            completionHandler(nil, error: true, errorMessage: "Download Error")
                             
                         
                         }
@@ -175,17 +164,22 @@ extension UdacityClient {
                     }
                     else {
                         if let jsonString = NSString(data: JSONData, encoding: NSUTF8StringEncoding) {
+                            
                             print("JSON String: \n\n \(jsonString)")
+                            
                         }
-                        fatalError("JSON does not contain a dictionary \(json)")
+                        
+                        completionHandler(nil, error: true, errorMessage: "JSON does not contain a dictionary")
                     }
                 }
                 else {
-                    fatalError("Can't parse JSON")
+                    
+                    completionHandler(nil, error: true, errorMessage: "Can't parse JSON")
                 }
             }
             else {
-                fatalError("JSONData is nil")
+                
+                completionHandler(nil, error: true, errorMessage: "JSONData is nil")
             }
             
         }
@@ -194,7 +188,7 @@ extension UdacityClient {
     }
     
     
-    class func postSessionNative(username: String, password: String, completionHandler: (Bool) -> Void) {
+    class func postSessionNative(username: String, password: String, completionHandler: (Bool, error: Bool, errorMessage: String) -> Void) {
     
         SwiftSpinner.show("Authenticating...")
         
@@ -220,7 +214,10 @@ extension UdacityClient {
                 
                 print("ERROR PATH")
                 SwiftSpinner.show((error?.localizedDescription)!, animated: false).addTapHandler({
+                    
+                    completionHandler(false, error: true, errorMessage: "No Error")
                     SwiftSpinner.hide()
+                    
                 })
                 
                 return
@@ -248,12 +245,16 @@ extension UdacityClient {
             if let sesid = responseJSON?["session"]?["id"] {
                 SwiftSpinner.hide()
                 
-                completionHandler(true)
+                completionHandler(true, error: false, errorMessage: "No Error")
                 print(sesid)
                 
                 if let idNumber = responseJSON?["account"]?["key"]  {
                     
                     getPublicDataNative(idNumber as! String)
+                    
+                } else {
+                    
+                    completionHandler(false, error: true, errorMessage: "Data Error")
                     
                 }
                 
@@ -308,27 +309,6 @@ extension UdacityClient {
         
     }
     
-    class func openSafari(urlString: String) {
-        
-        if urlString.rangeOfString("https://") == nil{
-            
-            print("adding https")
-            
-            let newS = "https://" + urlString
-            
-            var exitUrl : NSURL
-            exitUrl = NSURL(string: newS)!
-            UIApplication.sharedApplication().openURL(exitUrl)
-            
-        } else {
-            
-            var exitUrl : NSURL
-            exitUrl = NSURL(string: urlString)!
-            UIApplication.sharedApplication().openURL(exitUrl)
-            
-        }
-        
-    }
-    
+       
 
 }

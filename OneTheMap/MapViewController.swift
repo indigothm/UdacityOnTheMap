@@ -31,24 +31,34 @@ class MapViewController: UIViewController, UINavigationBarDelegate, MKMapViewDel
         
     }
     
+    func presentError(title: String, message: String) {
+        
+        SwiftSpinner.hide()
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+    
+    }
+    
 
     @IBAction func refreshDidTouch(sender: AnyObject) {
         
         SwiftSpinner.show("Loading...")
         
-        UdacityClient.getLocationsNative({ data in
+        UdacityClient.getLocationsNative({ data, error, errorMessage in
             
             dispatch_async(dispatch_get_main_queue()) { [unowned self] in
             
             print("SHARED INSTANCE TEST")
             print(StudentLocationsClient.sharedInstance.studentLocations)
             
-            guard data.isEmpty else {
+            if let output = data  {
             
             print(data)
             
             
-            for point in data {
+            for point in output {
                 
                 self.mapView.addAnnotation(point)
                 
@@ -59,6 +69,20 @@ class MapViewController: UIViewController, UINavigationBarDelegate, MKMapViewDel
                 
             return
                 
+            } else {
+                
+                if error {
+                
+                    self.presentError("Error", message: errorMessage)
+                    
+                } else
+                
+                {
+                    
+                     self.presentError("Unknown Error", message: "Something went wrong")
+                
+                }
+
             }
                 
             
@@ -116,20 +140,41 @@ class MapViewController: UIViewController, UINavigationBarDelegate, MKMapViewDel
         navBar.delegate = self
         mapView.delegate = self
         
-        UdacityClient.getLocationsNative({ data in
+        UdacityClient.getLocationsNative({ data, error, errorMessage in
             
             dispatch_async(dispatch_get_main_queue()) { [unowned self] in
                 
             SwiftSpinner.show("Loading...")
             
             print(data)
-            
-            for point in data {
-            
-            self.mapView.addAnnotation(point)
                 
-            SwiftSpinner.hide()
+            if let output = data
             
+            {
+                
+            for point in output {
+                
+                self.mapView.addAnnotation(point)
+                SwiftSpinner.hide()
+                
+            }
+                
+            } else {
+                
+                
+                if error {
+                    
+                    self.presentError("Error", message: errorMessage)
+                    
+                } else
+                    
+                {
+                    
+                    self.presentError("Unknown Error", message: "Something went wrong")
+                    
+                }
+
+                
             }
                 
             }

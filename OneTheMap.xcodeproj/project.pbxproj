@@ -111,10 +111,10 @@
 			children = (
 				3F393A6C1C3A590800DCDC2B /* UdacityClient.swift */,
 				3F393A6E1C3A5D1D00DCDC2B /* UdacityConvinience.swift */,
+				3FB4DC531C4FF19900A0EFDC /* StudentLocations.swift */,
 				3FB4DC481C42DD8C00A0EFDC /* LocationPost.swift */,
 				3FB4DC4E1C47EE4F00A0EFDC /* UserLocation.swift */,
 				3FB4DC501C48893D00A0EFDC /* UdacityData.swift */,
-				3FB4DC531C4FF19900A0EFDC /* StudentLocations.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
