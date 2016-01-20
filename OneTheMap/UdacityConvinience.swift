@@ -38,6 +38,14 @@ extension UdacityClient {
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil {
+                
+                
+                let alert = UIAlertView()
+                alert.title = "Posting Error"
+                alert.message = "Something went wrong"
+                alert.addButtonWithTitle("Understod")
+                alert.show()
+                
                 return
             }
             
@@ -78,19 +86,30 @@ extension UdacityClient {
     
     class func getLocationsNative(completionHandler: ([LocationPost]) -> Void) -> Void {
     
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation?order=-updatedAt")!)
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil {
                 
+          //QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr
                 
                 let alert = UIAlertView()
                 alert.title = "Download Error"
                 alert.message = "Something went wrong"
                 alert.addButtonWithTitle("Understod")
                 alert.show()
+                
+                //Use errors using completion handler
+                
+                /* 
+                
+                var alert = UIAlertController(title: "Hey", message: "This is  one Alert", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Working!!", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+                
+                */
                 
                 return
             }
@@ -105,32 +124,71 @@ extension UdacityClient {
                         print("Dictionary received")
                         print(jsonDictionary)
                         
-                        let dataArray = jsonDictionary["results"] as! NSArray
+                        print("RESPONSE TEST")
+                        print(response)
                         
-                        var locationArray: [LocationPost] = []
-                        
-                        for subJson in dataArray  {
-                            
-                            let pinPoint: LocationPost = LocationPost(
+                        guard let httpResponse = response as? NSHTTPURLResponse else {
                                 
-                                firstname: subJson["firstName"]! as! String,
-                                lastname: subJson["lastName"]! as! String!,
-                                mediaUrl: subJson["mediaURL"]! as! String!,
+                                SwiftSpinner.hide()
                             
-                                latitude: subJson["latitude"]! as! Double,
-                                longitude: subJson["longitude"] as! Double
-                                
-                            )
+                                let alert = UIAlertView()
+                                alert.title = "Download Error"
+                                alert.message = "Something went wrong"
+                                alert.addButtonWithTitle("Understod")
+                                alert.show()
                             
                             
-                            locationArray.append(pinPoint)
-                            
+                                return
                             
                         }
                         
-                        print("LOCATIONS")
-                        print(locationArray)
-                        completionHandler(locationArray)
+                        print("code \(httpResponse.statusCode)")
+                        
+                        if httpResponse.statusCode == 200  {
+                            
+                            let dataArray = jsonDictionary["results"] as! NSArray
+                                                        
+                            for subJson in dataArray  {
+                                
+                                let pinPoint: LocationPost = LocationPost(
+                                    
+                                    firstname: subJson["firstName"]! as! String,
+                                    lastname: subJson["lastName"]! as! String!,
+                                    mediaUrl: subJson["mediaURL"]! as! String!,
+                                    
+                                    latitude: subJson["latitude"]! as! Double,
+                                    longitude: subJson["longitude"] as! Double
+                                    
+                                )
+                                
+                                
+                                StudentLocationsClient.sharedInstance.studentLocations.append(pinPoint)
+                                
+                                
+                            }
+                            
+                            print("LOCATIONS")
+                            print(StudentLocationsClient.sharedInstance.studentLocations)
+                            
+                            
+                            completionHandler(StudentLocationsClient.sharedInstance.studentLocations)
+
+                            
+                        
+                        } else {
+                        
+                            SwiftSpinner.hide()
+                            let alert = UIAlertView()
+                            alert.title = "Download Error"
+                            alert.message = "Something went wrong"
+                            alert.addButtonWithTitle("Understod")
+                            alert.show()
+
+                            
+                        
+                        }
+                        
+                        
                         
                     }
                     else {
@@ -179,7 +237,7 @@ extension UdacityClient {
             if error != nil { // Handle error…
                 
                 print("ERROR PATH")
-                SwiftSpinner.show("Error", animated: false).addTapHandler({
+                SwiftSpinner.show((error?.localizedDescription)!, animated: false).addTapHandler({
                     SwiftSpinner.hide()
                 })
                 

@@ -40,7 +40,8 @@ class MapViewController: UIViewController, UINavigationBarDelegate, MKMapViewDel
             
             dispatch_async(dispatch_get_main_queue()) { [unowned self] in
             
-            
+            print("SHARED INSTANCE TEST")
+            print(StudentLocationsClient.sharedInstance.studentLocations)
             
             guard data.isEmpty else {
             

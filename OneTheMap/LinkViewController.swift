@@ -8,7 +8,6 @@
 
 import UIKit
 import MapKit
-import Alamofire
 import SwiftSpinner
 
 class LinkViewController: UIViewController, UITextFieldDelegate {
@@ -78,7 +77,7 @@ class LinkViewController: UIViewController, UITextFieldDelegate {
         
         
         
-        UserLocation.mediaURL = self.linkTextField.text
+        UserLocation.mediaURL = self.linkTextField.text!
         print(UserLocation.mediaURL)
         print(UserLocation.firstname)
         print(UserLocation.latitude)
