@@ -150,7 +150,7 @@ extension UdacityClient {
                                 
                                 
                                 StudentLocationsClient.sharedInstance.studentLocations.append(pinPoint)
-                                
+                                //test
                                 
                             }
                             
