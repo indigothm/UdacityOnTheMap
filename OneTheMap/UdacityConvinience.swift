@@ -40,11 +40,7 @@ extension UdacityClient {
             if error != nil {
                 
                 
-                let alert = UIAlertView()
-                alert.title = "Posting Error"
-                alert.message = "Something went wrong"
-                alert.addButtonWithTitle("Understod")
-                alert.show()
+                
                 
                 return
             }
@@ -94,12 +90,7 @@ extension UdacityClient {
             if error != nil {
                 
           //QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr
-                
-                let alert = UIAlertView()
-                alert.title = "Download Error"
-                alert.message = "Something went wrong"
-                alert.addButtonWithTitle("Understod")
-                alert.show()
+            
                 
                 //Use errors using completion handler
                 
@@ -131,11 +122,7 @@ extension UdacityClient {
                                 
                                 SwiftSpinner.hide()
                             
-                                let alert = UIAlertView()
-                                alert.title = "Download Error"
-                                alert.message = "Something went wrong"
-                                alert.addButtonWithTitle("Understod")
-                                alert.show()
+                            
                             
                             
                                 return
@@ -147,7 +134,7 @@ extension UdacityClient {
                         if httpResponse.statusCode == 200  {
                             
                             let dataArray = jsonDictionary["results"] as! NSArray
-                                                        
+                            
                             for subJson in dataArray  {
                                 
                                 let pinPoint: LocationPost = LocationPost(
@@ -177,12 +164,7 @@ extension UdacityClient {
                         
                         } else {
                         
-                            SwiftSpinner.hide()
-                            let alert = UIAlertView()
-                            alert.title = "Download Error"
-                            alert.message = "Something went wrong"
-                            alert.addButtonWithTitle("Understod")
-                            alert.show()
+                         
 
                             
                         
@@ -297,12 +279,6 @@ extension UdacityClient {
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil {
-                
-                let alert = UIAlertView()
-                alert.title = "Download Error"
-                alert.message = "Something went wrong"
-                alert.addButtonWithTitle("Understod")
-                alert.show()
                 
                 return
             }

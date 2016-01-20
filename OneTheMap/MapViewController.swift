@@ -70,7 +70,7 @@ class MapViewController: UIViewController, UINavigationBarDelegate, MKMapViewDel
     }
     
     
-    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         
         let identifier = "Location"
         
@@ -99,7 +99,7 @@ class MapViewController: UIViewController, UINavigationBarDelegate, MKMapViewDel
         return nil
     }
     
-    func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
         let location = view.annotation as! LocationPost
         let url = location.subtitle
