@@ -8,10 +8,11 @@
 
 import UIKit
 
-class StudentLocationsClient {
+struct StudentLocationsClient {
     
-     static let sharedInstance = StudentLocationsClient()
+    static var sharedInstance = StudentLocationsClient()
     
-     var studentLocations = [LocationPost]()
+    var studentLocations = [LocationPost]()
     
+
 }

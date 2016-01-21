@@ -34,45 +34,55 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
     }
     
-    var dataArray: [LocationPost] = []
     
     @IBAction func refreshDidTouch(sender: AnyObject) {
+        
+        self.tableViewMain.reloadData()
         
         SwiftSpinner.show("Loading...")
         
         UdacityClient.getLocationsNative({ data, error, errorMessage in
             
-            if let output = data  {
+            dispatch_async(dispatch_get_main_queue()) { [unowned self] in
                 
-            self.dataArray = output
-            self.tableViewMain.reloadData()
                 
-            SwiftSpinner.hide()
-             
-            
-            } else {
-            
-                
-                if error {
-                    
-                    self.presentError("Error", message: errorMessage)
-                    
-                } else
+                if let _ = data
                     
                 {
                     
-                    self.presentError("Unknown Error", message: "Something went wrong")
+                    self.tableViewMain.reloadData()
+                    
+                    
+                    SwiftSpinner.hide()
+                    
+                } else {
+                    
+                    
+                    if error {
+                        
+                        SwiftSpinner.hide()
+                        
+                        self.presentError("Error", message: errorMessage)
+                        
+                    } else
+                        
+                    {
+                        SwiftSpinner.hide()
+                        
+                        self.presentError("Unknown Error", message: "Something went wrong")
+                        
+                    }
+                    
                     
                 }
-
-            
+                
             }
             
-            
-            
-            
-            
         })
+
+        
+        
+       
 
         
     }
@@ -99,7 +109,6 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
             dispatch_async(dispatch_get_main_queue()) { [unowned self] in
                 
                 
-                self.dataArray = StudentLocationsClient.sharedInstance.studentLocations
                 self.tableViewMain.reloadData()
                 
                 
@@ -124,16 +133,16 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataArray.count
+        return StudentLocationsClient.sharedInstance.studentLocations.count
     }
-
+ 
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("main", forIndexPath: indexPath) as! TableViewCell
         
         let row = indexPath.row
-        cell.nameLabel.text = dataArray[row].firstname
-        cell.infoLabel.text = dataArray[row].mediaUrl
+        cell.nameLabel.text = StudentLocationsClient.sharedInstance.studentLocations[row].firstname
+        cell.infoLabel.text = StudentLocationsClient.sharedInstance.studentLocations[row].mediaUrl
         
         
         
@@ -144,7 +153,15 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         print("OPEN SAFARI")
         
-        UdacityClient.openSafari(dataArray[indexPath.row].mediaUrl)
+        UdacityClient.openSafari(StudentLocationsClient.sharedInstance.studentLocations[indexPath.row].mediaUrl, completionHandeler: { error in
+            
+            if error == true {
+                
+                self.presentError("Url Error", message: "Incorect web address")
+            
+            }
+            
+        })
         
         
         

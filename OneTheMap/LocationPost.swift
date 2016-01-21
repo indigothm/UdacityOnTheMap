@@ -9,7 +9,7 @@
 import Foundation
 import MapKit
 
-class LocationPost: NSObject, MKAnnotation {
+struct LocationPost {
     
     let firstname: String
     let lastname: String
@@ -29,13 +29,14 @@ class LocationPost: NSObject, MKAnnotation {
         return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
     
-    init(firstname: String, lastname: String, mediaUrl: String, latitude: Double, longitude: Double) {
+    
+    init (dict: [String: AnyObject]) {
         
-        self.firstname = firstname
-        self.lastname = lastname
-        self.mediaUrl = mediaUrl
-        self.latitude = latitude
-        self.longitude = longitude
+        self.firstname = dict["firstname"] as! String
+        self.lastname = dict["lastname"] as! String
+        self.mediaUrl = dict["mediaUrl"] as! String
+        self.latitude = dict["latitude"] as! Double
+        self.longitude = dict["longitude"] as! Double
         
     }
     

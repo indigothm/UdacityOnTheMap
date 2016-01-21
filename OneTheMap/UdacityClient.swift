@@ -8,10 +8,11 @@
 
 import Foundation
 import Alamofire
+import MapKit
 
 class UdacityClient: NSObject {
 
-    class func openSafari(urlString: String) {
+    class func openSafari(urlString: String, completionHandeler: (error: Bool) -> Void) {
         
         if urlString.rangeOfString("https://") == nil{
             
@@ -19,15 +20,25 @@ class UdacityClient: NSObject {
             
             let newS = "https://" + urlString
             
-            var exitUrl : NSURL
-            exitUrl = NSURL(string: newS)!
+            if let exitUrl = NSURL(string: newS) {
             UIApplication.sharedApplication().openURL(exitUrl)
+            } else {
+                
+                completionHandeler(error: true)
+                
+            }
             
         } else {
             
-            var exitUrl : NSURL
-            exitUrl = NSURL(string: urlString)!
+            if let exitUrl = NSURL(string: urlString) {
+                
             UIApplication.sharedApplication().openURL(exitUrl)
+            
+            } else {
+                
+                completionHandeler(error: true)
+                
+            }
             
         }
         

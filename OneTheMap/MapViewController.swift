@@ -41,6 +41,26 @@ class MapViewController: UIViewController, UINavigationBarDelegate, MKMapViewDel
     
     }
     
+    func createPins(dataArray:[LocationPost]){
+        
+        var annotations = [MKPointAnnotation]()
+        
+        for student in dataArray {
+            //Creating singular pin
+            let annotation = MKPointAnnotation()
+            //Adding attributes to the pin
+            annotation.coordinate = student.coordinate
+            annotation.title = student.title
+            annotation.subtitle = student.mediaUrl
+            
+            annotations.append(annotation)
+        }
+        
+        // When the array is complete, we add the annotations to the map.
+        self.mapView.addAnnotations(annotations)
+        
+    }
+    
 
     @IBAction func refreshDidTouch(sender: AnyObject) {
         
@@ -58,11 +78,7 @@ class MapViewController: UIViewController, UINavigationBarDelegate, MKMapViewDel
             print(data)
             
             
-            for point in output {
-                
-                self.mapView.addAnnotation(point)
-                
-            }
+            self.createPins(output)
 
                 
             SwiftSpinner.hide()
@@ -99,8 +115,6 @@ class MapViewController: UIViewController, UINavigationBarDelegate, MKMapViewDel
         let identifier = "Location"
         
         
-        if annotation.isKindOfClass(LocationPost.self) {
-            
             var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier)
             
             if annotationView == nil {
@@ -117,18 +131,25 @@ class MapViewController: UIViewController, UINavigationBarDelegate, MKMapViewDel
             }
             
             return annotationView
-        }
         
         
-        return nil
+        
     }
     
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
-        let location = view.annotation as! LocationPost
-        let url = location.subtitle
+        let location = view.annotation
+        let url = location!.subtitle
         
-        UdacityClient.openSafari(url!)
+        UdacityClient.openSafari(url!!, completionHandeler: { error in
+            
+            if error == true {
+                
+                self.presentError("Url Error", message: "Incorect web address")
+                
+            }
+        
+        })
         
         
     }
@@ -152,12 +173,11 @@ class MapViewController: UIViewController, UINavigationBarDelegate, MKMapViewDel
             
             {
                 
-            for point in output {
                 
-                self.mapView.addAnnotation(point)
+                self.createPins(output)
                 SwiftSpinner.hide()
                 
-            }
+            
                 
             } else {
                 

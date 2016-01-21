@@ -110,7 +110,14 @@ class LinkViewController: UIViewController, UITextFieldDelegate {
                 
                 if error {
                     
-                    self.presentError("Error", message: errorMessage)
+                     dispatch_async(dispatch_get_main_queue(), {
+                    
+                    SwiftSpinner.show("Posting Error", animated: false).addTapHandler({
+                        SwiftSpinner.hide()
+                    })
+                        
+                    })
+
                     
                 } else
                     

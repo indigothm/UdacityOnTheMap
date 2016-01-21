@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import SwiftSpinner
 
 class LocationSearchViewController: UIViewController, UITextFieldDelegate {
     
@@ -72,12 +73,25 @@ class LocationSearchViewController: UIViewController, UITextFieldDelegate {
         
         let address = searchTextField.text
         
+         SwiftSpinner.show("Searching for location")
+        
         geocoder.geocodeAddressString(address!, completionHandler: {(placemarks, error) -> Void in
+            
+            
             if((error) != nil){
+                
                 print("Error", error)
+                
+                SwiftSpinner.show("Invalid Location", animated: false).addTapHandler({
+                    SwiftSpinner.hide()
+                })
+                
                 
             }
             if let placemark = placemarks?.first {
+                
+                SwiftSpinner.hide()
+                
                 let coordinates:CLLocationCoordinate2D = placemark.location!.coordinate
                 
                 print (coordinates)

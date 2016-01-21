@@ -36,7 +36,11 @@ extension UdacityClient {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.HTTPBody = jsonData
         let session = NSURLSession.sharedSession()
+        
         let task = session.dataTaskWithRequest(request) { data, response, error in
+            
+            print(error)
+            
             if error != nil {
                 
                  completionHandler(false, error: true, errorMessage: "Posting Error")
@@ -47,7 +51,7 @@ extension UdacityClient {
             print(NSString(data: data!, encoding: NSUTF8StringEncoding))
         
             print("SUCCESS")
-            
+                        
             completionHandler(true, error: false, errorMessage: "No Error")
 
         }
@@ -82,14 +86,12 @@ extension UdacityClient {
     class func getLocationsNative(completionHandler: ([LocationPost]?, error: Bool, errorMessage: String) -> Void) -> Void {
     
         let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation?order=-updatedAt")!)
-        request.addValue("", forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
             if error != nil {
-                
-            //QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr
-                
+                                
                                 
                 return
             }
@@ -126,14 +128,21 @@ extension UdacityClient {
                             
                             for subJson in dataArray  {
                                 
+
                                 let pinPoint: LocationPost = LocationPost(
                                     
-                                    firstname: subJson["firstName"]! as! String,
-                                    lastname: subJson["lastName"]! as! String!,
-                                    mediaUrl: subJson["mediaURL"]! as! String!,
+                                    dict: [
+                                    "firstname":  subJson["firstName"]! as! String,
+                                    "lastname": subJson["lastName"]! as! String!,
+                                    "mediaUrl": subJson["mediaURL"]! as! String!,
                                     
-                                    latitude: subJson["latitude"]! as! Double,
-                                    longitude: subJson["longitude"] as! Double
+                                    "latitude": subJson["latitude"]! as! Double,
+                                    "longitude":  subJson["longitude"] as! Double
+                                    
+                                    
+                                    ]
+                                    
+                                    
                                     
                                 )
                                 
@@ -213,7 +222,7 @@ extension UdacityClient {
             if error != nil { // Handle error…
                 
                 print("ERROR PATH")
-                SwiftSpinner.show((error?.localizedDescription)!, animated: false).addTapHandler({
+                SwiftSpinner.show("Error", animated: false).addTapHandler({
                     
                     completionHandler(false, error: true, errorMessage: "No Error")
                     SwiftSpinner.hide()
